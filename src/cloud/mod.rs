@@ -1,6 +1,6 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
-use smash::lua2cpp::L2CFighterCommon;
+use smash::lua2cpp::{L2CFighterCommon,L2CFighterBase};
 use acmd::{acmd, acmd_func};
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -559,8 +559,8 @@ pub fn instant_cloud_attack_air_lw(fighter: &mut L2CFighterCommon) {
     }
     frame(Frame=11)
     if(is_excute){
-        ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=270, KBG=200, FKB=0, BKB=10, Size=3.6, X=0.0, Y=11.0, Z=0.0, X2=0.0, Y2=12.5, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
-        ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=270, KBG=200, FKB=0, BKB=30, Size=4.5, X=0.0, Y=7.0, Z=0.0, X2=0.0, Y2=13.0, Z2=0.0, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=0, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=270, KBG=115, FKB=0, BKB=10, Size=3.6, X=0.0, Y=11.0, Z=0.0, X2=0.0, Y2=12.5, Z2=0.0, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=1, Part=0, Bone=hash40("haver"), Damage=22.0, Angle=270, KBG=115, FKB=0, BKB=30, Size=4.5, X=0.0, Y=7.0, Z=0.0, X2=0.0, Y2=13.0, Z2=0.0, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_SWORD)
     }
     wait(Frames=3)
     if(is_excute){
@@ -578,7 +578,113 @@ pub fn instant_cloud_attack_air_lw(fighter: &mut L2CFighterCommon) {
     });
 
 }
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_CLOUD,
+animation = "special_n",
+animcmd = "game_specialn")]
+pub fn instant_cloud_special_n(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+    MotionModule::set_rate(15.0)
+    }
+    frame(Frame=10)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    frame(Frame=15)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
+    }
+    frame(Frame=16)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.0, Angle=361, KBG=100, FKB=40, BKB=0, Size=3.0, X=0.0, Y=6.5, Z=5.5, X2=0.0, Y2=6.5, Z2=4.5, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    wait(Frames=2)
+    if(is_excute){
+        AttackModule::clear_all()
+        ArticleModule::generate_article(FIGHTER_CLOUD_GENERATE_ARTICLE_WAVE,false,0)
+    }
+    frame(Frame=22)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    });
 
+}
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_CLOUD,
+animation = "special_air_n",
+animcmd = "game_specialairn")]
+pub fn instant_cloud_special_air_n(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+    MotionModule::set_rate(15.0)
+    }
+    frame(Frame=10)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    frame(Frame=15)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
+    }
+    frame(Frame=16)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.0, Angle=361, KBG=100, FKB=40, BKB=0, Size=3.0, X=0.0, Y=6.5, Z=5.5, X2=0.0, Y2=6.5, Z2=4.5, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    wait(Frames=2)
+    if(is_excute){
+        AttackModule::clear_all()
+        ArticleModule::generate_article(FIGHTER_CLOUD_GENERATE_ARTICLE_WAVE,false,0)
+    }
+    frame(Frame=22)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    });
+}
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON,
+battle_object_kind = WEAPON_KIND_CLOUD_WAVE,
+animation = "regular",
+animcmd = "game_regular")]
+pub fn cloud_wave_beam(fighter : &mut L2CFighterBase) {
+    acmd!({
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=13.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=3.0, X=0.0, Y=11.0, Z=-2.1, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=13.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=3.0, X=0.0, Y=1.7, Z=-0.8, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_aura"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        WorkModule::on_flag(Flag=WEAPON_CLOUD_WAVE_INSTANCE_WORK_ID_FLAG_ATTACK_POWER_LOW)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=2.7, X=0.0, Y=11.0, Z=-2.1, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-3, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=2.7, X=0.0, Y=1.7, Z=-0.8, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-3, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
+    }
+    });
+
+}
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_WEAPON,
+battle_object_kind = WEAPON_KIND_CLOUD_WAVE,
+animation = "regular_air",
+animcmd = "game_regularair")]
+pub fn cloud_wave_beam_air(fighter : &mut L2CFighterBase) {
+    acmd!({
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=13.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=3.0, X=0.0, Y=11.0, Z=-2.1, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=13.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=3.0, X=0.0, Y=1.7, Z=-0.8, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-4, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_aura"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        WorkModule::on_flag(Flag=WEAPON_CLOUD_WAVE_INSTANCE_WORK_ID_FLAG_ATTACK_POWER_LOW)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=10.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=2.7, X=0.0, Y=11.0, Z=-2.1, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-3, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_NONE)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=10.0, Angle=55, KBG=85, FKB=0, BKB=38, Size=2.7, X=0.0, Y=1.7, Z=-0.8, X2=0.0, Y2=5.0, Z2=0.0, Hitlag=0.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_SPEED, SetWeight=false, ShieldDamage=-3, Trip=0.0, Rehit=0, Reflectable=true, Absorbable=true, Flinchless=false, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_NO_FLOOR, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_elec"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_NONE)
+    }
+    });
+
+}
 pub fn install() {
     acmd::add_hooks!(
     cloud_attack_11,
@@ -595,9 +701,11 @@ pub fn install() {
     instant_cloud_attack_air_f,
     instant_cloud_attack_air_b,
     instant_cloud_attack_air_hi,
-    instant_cloud_attack_air_lw
-
-
+    instant_cloud_attack_air_lw,
+    instant_cloud_special_n,
+    instant_cloud_special_air_n,
+    cloud_wave_beam,
+    cloud_wave_beam_air
 
     );
 }

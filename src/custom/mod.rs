@@ -2,9 +2,7 @@ use smash::app::lua_bind::*;
 use smash::app::utility::get_kind;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
-use smash::params::*;
 use acmd;
-
 
 
 // Use this for general per-frame fighter-level hooks
@@ -12,7 +10,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
-
 
     }
 }

@@ -62,7 +62,7 @@ pub fn instant_dk_attack_12(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_dash(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(8.0)
+			MotionModule::set_rate(7.0)
 		}
 		frame(Frame=8)
 		if (is_excute) {
