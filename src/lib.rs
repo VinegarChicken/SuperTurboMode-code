@@ -16,6 +16,9 @@ mod dedede;
 mod cloud;
 mod squirtle;
 mod samusanddarksamus;
+mod marth;
+mod krool;
+mod ike;
 
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
@@ -32,6 +35,9 @@ pub fn main() {
     dedede::install();
     cloud::install();
     squirtle::install();
-    samusanddarksamus::install()
+    samusanddarksamus::install();
+    marth::install();
+    krool::install();
+    ike::install;
     //diddy::install();
 }
