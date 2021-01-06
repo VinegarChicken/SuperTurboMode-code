@@ -243,7 +243,7 @@ animcmd = "game_attacks4")]
 pub fn instant_dk_attack_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(20.0)
+			MotionModule::set_rate(18.0)
 		}
 		frame(Frame=15)
 		if(is_excute){

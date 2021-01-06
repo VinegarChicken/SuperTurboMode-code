@@ -19,7 +19,8 @@ mod samusanddarksamus;
 mod marth;
 mod krool;
 mod ike;
-
+mod shulk;
+mod zss;
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
     mario::install();
@@ -39,5 +40,7 @@ pub fn main() {
     marth::install();
     krool::install();
     ike::install;
+    shulk::install();
+    zss::install();
     //diddy::install();
 }

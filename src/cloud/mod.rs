@@ -185,7 +185,6 @@ pub fn instant_cloud_attack_hi3(fighter: &mut L2CFighterCommon) {
     }
     });
 
-
 }
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,

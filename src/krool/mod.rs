@@ -258,8 +258,6 @@ pub fn instant_king_krool_dsmash(fighter: &mut L2CFighterCommon) {
 	AttackModule::clear_all()
 	}
 
-
-
     });
 }
 #[acmd_func(
@@ -315,9 +313,6 @@ pub fn instant_king_krool_fsmashhi(fighter: &mut L2CFighterCommon) {
 	if(is_excute){
 	AttackModule::clear_all()
 	}
-
-
-
     });
 }
 #[acmd_func(
@@ -367,9 +362,9 @@ pub fn instant_king_krool_dtilt(fighter: &mut L2CFighterCommon) {
 	}
 	frame(Frame=14)
 	if(is_excute){
-	ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=110.0, Angle=361, KBG=150, FKB=0, BKB=80, Size=5.0, X=0.0, Y=3.5, Z=16.5, X2=0.0, Y2=3.5, Z2=18.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-	ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=110.0, Angle=361, KBG=150, FKB=0, BKB=30, Size=5.0, X=0.0, Y=3.5, Z=16.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G_d, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
-	ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=110.0, Angle=85, KBG=150, FKB=0, BKB=100, Size=10.0, X=0.0, Y=5.5, Z=13.0, X2=0.0, Y2=5.5, Z2=23.0, Hitlag=0.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+	ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=110.0, Angle=361, KBG=400, FKB=400, BKB=400, Size=5.0, X=0.0, Y=3.5, Z=16.5, X2=0.0, Y2=3.5, Z2=18.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+	ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=110.0, Angle=361, KBG=400, FKB=400, BKB=400, Size=5.0, X=0.0, Y=3.5, Z=16.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G_d, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
+	ATTACK(ID=2, Part=0, Bone=hash40("top"), Damage=110.0, Angle=85, KBG=400, FKB=400, BKB=400, Size=10.0, X=0.0, Y=5.5, Z=13.0, X2=0.0, Y2=5.5, Z2=23.0, Hitlag=0.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_bury"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_KICK)
 	//AttackModule::set_attack_height_all(ATTACK_HEIGHT_LOW, false)
 	}
 	wait(Frames=2)
