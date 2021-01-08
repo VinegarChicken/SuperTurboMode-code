@@ -14,6 +14,8 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         //status kind 87 is get up from missed tech.
         //status kind 103 is teching ground
         //status kind 88 is rolling from ground missed tech
+        //status kind 34 is air dodging
+        //status kind 32 is dodging
         let lua_state = fighter.lua_state_agent;
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
@@ -30,7 +32,10 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         if StatusModule::status_kind(module_accessor) == 104{
             StatusModule::change_status_request_from_script(module_accessor,83,true);
         }
-
+        if StatusModule::status_kind(module_accessor) == 34{
+            CancelModule::enable_cancel(module_accessor);
+        }
+        //println!("{}",StatusModule::status_kind(module_accessor) );
     }
 }
 
