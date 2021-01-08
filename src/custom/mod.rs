@@ -31,12 +31,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             StatusModule::change_status_request_from_script(module_accessor,83,true);
         }
 
-
-
-            println!("{}",StatusModule::status_kind(module_accessor))
-
-
-
     }
 }
 
