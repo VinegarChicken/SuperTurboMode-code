@@ -6,24 +6,36 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::*;
 use acmd::{acmd, acmd_func};
-
+use smash::app::sv_math::*;
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
+        //status kind 83 is on the ground for missed tech
+        //status kind 87 is get up from missed tech.
+        //status kind 103 is teching ground
+        //status kind 88 is rolling from ground missed tech
         let lua_state = fighter.lua_state_agent;
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
-        if fighter_kind == *FIGHTER_KIND_PURIN{
-            acmd!(lua_state,{
-            ATTACK(ID=0, Part=0, Bone=hash40("rot"), Damage=100.0, Angle=88, KBG=66, FKB=0, BKB=100, Size=8.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_flower"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_BAT, Type=ATTACK_REGION_BODY)
-            });
-        }
+
         if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK{
             CancelModule::enable_cancel(module_accessor);
         }
         if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_100{
             CancelModule::enable_cancel(module_accessor);
         }
+        if StatusModule::status_kind(module_accessor) == 103{
+           StatusModule::change_status_request_from_script(module_accessor,83,true);
+        }
+        if StatusModule::status_kind(module_accessor) == 104{
+            StatusModule::change_status_request_from_script(module_accessor,83,true);
+        }
+
+
+
+            println!("{}",StatusModule::status_kind(module_accessor))
+
+
 
     }
 }
