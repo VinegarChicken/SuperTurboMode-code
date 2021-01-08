@@ -27,10 +27,10 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             CancelModule::enable_cancel(module_accessor);
         }
         if StatusModule::status_kind(module_accessor) == 103{
-           StatusModule::change_status_request_from_script(module_accessor,83,true);
+           StatusModule::change_status_request_from_script(module_accessor,83, true);
         }
         if StatusModule::status_kind(module_accessor) == 104{
-            StatusModule::change_status_request_from_script(module_accessor,83,true);
+            StatusModule::change_status_request_from_script(module_accessor,83, true);
         }
         if StatusModule::status_kind(module_accessor) == 34{
             CancelModule::enable_cancel(module_accessor);
