@@ -1,6 +1,6 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
-
+#[warn(unused_imports)]
 mod mario;
 mod falco;
 mod custom;
@@ -21,6 +21,10 @@ mod krool;
 mod ike;
 mod shulk;
 mod zss;
+mod drmario;
+mod ness;
+mod roy;
+
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
     mario::install();
@@ -39,8 +43,12 @@ pub fn main() {
     samusanddarksamus::install();
     marth::install();
     krool::install();
-    ike::install;
+    ike::install();
     shulk::install();
     zss::install();
-    //diddy::install();
+    drmario::install();
+    ness::install();
+    roy::install();
+    smash::params::add_hook(custom::params_main).unwrap();
+
 }

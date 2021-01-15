@@ -389,9 +389,10 @@ pub fn instant_ike_s_tilt(fighter: &mut L2CFighterCommon) {
 
     });
 }
+
 pub fn install() {
     acmd::add_hooks!(
-     instant_ike_fair,
+    instant_ike_fair,
 	instant_ike_dair,
 	instant_ike_bair,
 	instant_ike_uair,

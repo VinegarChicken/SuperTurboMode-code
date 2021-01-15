@@ -6,7 +6,9 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::*;
 use acmd::{acmd, acmd_func};
-use smash::app::sv_math::*;
+use smash::cpp::root::app::lua_bind::StatusModule::*;
+use smash::params::*;
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -20,40 +22,28 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
 
-        if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK{
+        if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK{
             CancelModule::enable_cancel(module_accessor);
         }
-        if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_100{
+        if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_100{
             CancelModule::enable_cancel(module_accessor);
         }
-        if StatusModule::status_kind(module_accessor) == 103{
-           StatusModule::change_status_request_from_script(module_accessor, 83, true);
+        if status_kind(module_accessor) == 103{
+           change_status_request_from_script(module_accessor, 83, true);
         }
-        if StatusModule::status_kind(module_accessor) == 104{
-            StatusModule::change_status_request_from_script(module_accessor, 83, true);
+        if status_kind(module_accessor) == 104{
+            change_status_request_from_script(module_accessor, 83, true);
         }
         if StatusModule::status_kind(module_accessor) == 34{
             CancelModule::enable_cancel(module_accessor);
         }
+
         //println!("{}",StatusModule::status_kind(module_accessor) );
     }
 }
 
 
-// Use this for general per-frame weapon-level hooks
-pub fn once_per_weapon_frame(fighter_base : &mut L2CFighterBase) {
-    unsafe {
-        let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter_base.lua_state_agent);
-        let frame = smash::app::lua_bind::MotionModule::frame(module_accessor) as i32;
-
-        if frame % 10 == 0 {
-            //println!("[Weapon Hook] Frame : {}", frame);
-        }
-    }
-}
 
 pub fn install() {
     acmd::add_custom_hooks!(once_per_fighter_frame);
-    acmd::add_custom_weapon_hooks!(once_per_weapon_frame);
-
 }
