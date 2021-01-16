@@ -36,14 +36,15 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         if status_kind(module_accessor) == 104{
             change_status_request_from_script(module_accessor, 83, true);
         }
+         */
         if StatusModule::status_kind(module_accessor) == 34{
             CancelModule::enable_cancel(module_accessor);
         }
-         */
+
         if fighter_kind == *FIGHTER_KIND_DAISY{
             //ItemModule::have_item(module_accessor,ItemKind(*ITEM_KIND_BOMBHEI),0,0,false,false);
         }
-        println!("{}",StatusModule::status_kind(module_accessor) );
+        //println!("{}",StatusModule::status_kind(module_accessor) );
     }
 }
 
