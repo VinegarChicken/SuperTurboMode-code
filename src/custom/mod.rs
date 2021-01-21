@@ -9,6 +9,7 @@ use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
 use smash::cpp::root::app::ItemKind;
 
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -18,8 +19,6 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         //status kind 88 is rolling from ground missed tech
         //status kind 34 is air dodging
         //status kind 32 is dodging
-        let lua_state = fighter.lua_state_agent;
-        let rand_val = app::sv_math::rand(hash40("fighter"), 100);
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
 
@@ -41,9 +40,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
             CancelModule::enable_cancel(module_accessor);
         }
 
-        if fighter_kind == *FIGHTER_KIND_DAISY{
-            //ItemModule::have_item(module_accessor,ItemKind(*ITEM_KIND_BOMBHEI),0,0,false,false);
-        }
+
         //println!("{}",StatusModule::status_kind(module_accessor) );
     }
 }
