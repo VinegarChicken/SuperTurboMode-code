@@ -1,6 +1,7 @@
 #![feature(concat_idents)]
 #![feature(proc_macro_hygiene)]
-#[warn(unused_imports)]
+
+
 mod mario;
 mod falco;
 mod custom;
@@ -24,6 +25,8 @@ mod zss;
 mod drmario;
 mod ness;
 mod roy;
+mod corrin;
+mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
@@ -49,6 +52,6 @@ pub fn main() {
     drmario::install();
     ness::install();
     roy::install();
-    smash::params::add_hook(custom::params_main).unwrap();
-
+    corrin::install();
+    //sephiroth::install();
 }
