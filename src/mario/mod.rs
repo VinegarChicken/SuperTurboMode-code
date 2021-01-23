@@ -80,21 +80,34 @@ pub fn mario_dair(fighter: &mut L2CFighterCommon) {
         }
     });
 }
+
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_MARIO,
-animation = "special_n",
-animcmd = "game_specialn")]
-pub fn mario_n_special(fighter: &mut L2CFighterCommon) {
+animation = "attack_s4_s",
+animcmd = "game_attacks4")]
+pub fn instant_mario_attack_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    FT_MOTION_RATE(FSM=1.15)
-    frame(Frame=14)
-    for(20 Iterations){
+    if(is_execute){
+    MotionModule::set_rate(12.0)
+    }
+    frame(Frame=6)
     if(is_excute){
-        ArticleModule::generate_article(FIGHTER_MARIO_GENERATE_ARTICLE_FIREBALL,false,0)
+        WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
     }
+    frame(Frame=13)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
     }
-
+    frame(Frame=15)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("arml"), Damage=21.7, Angle=361, KBG=115, FKB=0, BKB=25, Size=2.0, X=-1.0, Y=0.7, Z=0.0, X2=-3.0, Y2=1.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_purple"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
+        ATTACK(ID=1, Part=0, Bone=hash40("arml"), Damage=21.7, Angle=361, KBG=115, FKB=0, BKB=25, Size=5.0, X=5.4, Y=0.0, Z=-1.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
+    }
+    wait(Frames=3)
+    if(is_excute){
+        AttackModule::clear_all()
+    }
     });
 
 }
@@ -130,11 +143,98 @@ pub fn mario_uair(fighter: &mut L2CFighterCommon) {
 
 
 }
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_MARIO,
+animation = "special_s",
+animcmd = "game_specials")]
+pub fn instant_mario_special_s(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_excute){
+        MotionModule::set_rate(11.0)
+        ArticleModule::generate_article(FIGHTER_MARIO_GENERATE_ARTICLE_MANTLE,false,0)
+        sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+    }
+    frame(Frame=6)
+    if(is_excute){
+        SEARCH(0, 0, hash40("top"), 8.0, 0.0, 6.5, 2.5, 0.0, 6.5, 8.0, COLLISION_KIND_MASK_ATTACK, HIT_STATUS_MASK_NORMAL, 60, COLLISION_SITUATION_MASK_GA, COLLISION_CATEGORY_MASK_ALL, COLLISION_PART_MASK_ALL, false)
+        WorkModule::set_float(9.0, FIGHTER_MARIO_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
+    }
+    frame(Frame=9)
+    if(is_excute){
+        sv_module_access::search(MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL)
+        sv_module_access::shield(MA_MSC_CMD_SHIELD_ON, COLLISION_KIND_REFLECTOR, FIGHTER_MARIO_REFLECTOR_KIND_MANTLE, FIGHTER_REFLECTOR_GROUP_EXTEND)
+    }
+    frame(Frame=12)
+    if(is_excute){
+        MotionModule::set_rate(1.0)
+        WorkModule::on_flag(Flag=FIGHTER_MARIO_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=110, KBG=100, FKB=80, BKB=0, Size=7.5, X=0.0, Y=6.7, Z=9.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MARIO_MANT, Type=ATTACK_REGION_OBJECT)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=110, KBG=100, FKB=80, BKB=0, Size=5.0, X=0.0, Y=6.7, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MARIO_MANT, Type=ATTACK_REGION_OBJECT)
+    }
+    frame(Frame=15)
+    if(is_excute){
+        sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        AttackModule::clear_all()
+    }
+    frame(Frame=21)
+    if(is_excute){
+        sv_module_access::shield(MA_MSC_CMD_SHIELD_OFF, COLLISION_KIND_REFLECTOR, FIGHTER_MARIO_REFLECTOR_KIND_MANTLE, FIGHTER_REFLECTOR_GROUP_EXTEND)
+        WorkModule::off_flag(Flag=FIGHTER_MARIO_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL)
+    }
+    });
+
+}
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_MARIO,
+animation = "special_air_s",
+animcmd = "game_specialairs")]
+pub fn instant_mario_special_air_s(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_excute){
+        MotionModule::set_rate(11.0)
+        ArticleModule::generate_article(FIGHTER_MARIO_GENERATE_ARTICLE_MANTLE,false,0)
+        sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS)
+    }
+    frame(Frame=6)
+    if(is_excute){
+        SEARCH(0, 0, hash40("top"), 8.0, 0.0, 6.5, 2.5, 0.0, 6.5, 8.0, COLLISION_KIND_MASK_ATTACK, HIT_STATUS_MASK_NORMAL, 60, COLLISION_SITUATION_MASK_GA, COLLISION_CATEGORY_MASK_ALL, COLLISION_PART_MASK_ALL, false)
+        WorkModule::set_float(9.0, FIGHTER_MARIO_STATUS_SPECIAL_S_WORK_ID_FLOAT_REFLECT_MOTION_FRAME)
+    }
+    frame(Frame=9)
+    if(is_excute){
+        sv_module_access::search(MA_MSC_CMD_SEARCH_SEARCH_SCH_CLR_ALL)
+        sv_module_access::shield(MA_MSC_CMD_SHIELD_ON, COLLISION_KIND_REFLECTOR, FIGHTER_MARIO_REFLECTOR_KIND_MANTLE, FIGHTER_REFLECTOR_GROUP_EXTEND)
+    }
+    frame(Frame=12)
+    if(is_excute){
+        MotionModule::set_rate(1.0)
+        WorkModule::on_flag(Flag=FIGHTER_MARIO_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=11.0, Angle=110, KBG=100, FKB=80, BKB=0, Size=7.5, X=0.0, Y=6.7, Z=9.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MARIO_MANT, Type=ATTACK_REGION_OBJECT)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=11.0, Angle=110, KBG=100, FKB=80, BKB=0, Size=5.0, X=0.0, Y=6.7, Z=5.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=4, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_turn"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MARIO_MANT, Type=ATTACK_REGION_OBJECT)
+    }
+    frame(Frame=15)
+    if(is_excute){
+        sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        AttackModule::clear_all()
+    }
+    frame(Frame=21)
+    if(is_excute){
+        sv_module_access::shield(MA_MSC_CMD_SHIELD_OFF, COLLISION_KIND_REFLECTOR, FIGHTER_MARIO_REFLECTOR_KIND_MANTLE, FIGHTER_REFLECTOR_GROUP_EXTEND)
+        WorkModule::off_flag(Flag=FIGHTER_MARIO_STATUS_SPECIAL_S_FLAG_SPECIAL_FALL)
+    }
+    });
+
+}
+
 pub fn install() {
     acmd::add_hooks!(
         mario_fair,
         mario_dair,
-        mario_n_special,
-        mario_uair
+        mario_uair,
+        instant_mario_attack_s4,
+        instant_mario_special_s,
+        instant_mario_special_air_s
     );
 }
