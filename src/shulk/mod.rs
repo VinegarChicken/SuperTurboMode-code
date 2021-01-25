@@ -556,6 +556,58 @@ pub fn instant_shulk_attack_air_lw(fighter: &mut L2CFighterCommon) {
 
 
 }
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_SHULK,
+animation = "special_s",
+animcmd = "game_specials")]
+pub fn instant_shulk_special_s(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+    MotionModule::set_rate(29.0)
+    }
+    frame(Frame=30)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
+    }
+    frame(Frame=31)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=3.5, X=7.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=1, Part=0, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=4, Part=1, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=3.5, X=7.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=5, Part=1, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        AttackModule::set_lr_check_front(0)
+        AttackModule::set_lr_check_back(1)
+    }
+    });
+
+}
+
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_SHULK,
+animation = "special_air_s",
+animcmd = "game_specialairs")]
+pub fn instant_shulk_special_air_s(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+    MotionModule::set_rate(29.0)
+    }
+    frame(Frame=30)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
+    }
+    frame(Frame=31)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=3.5, X=7.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=1, Part=0, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.8, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=4, Part=1, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=3.5, X=7.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        ATTACK(ID=5, Part=1, Bone=hash40("swordr"), Damage=16.0, Angle=140, KBG=100, FKB=0, BKB=30, Size=4.0, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.5, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_BACK_SLASH, SetWeight=false, ShieldDamage=7, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_CUTUP, Type=ATTACK_REGION_SWORD)
+        AttackModule::set_lr_check_front(0)
+        AttackModule::set_lr_check_back(1)
+    }
+    });
+}
 pub fn install() {
     acmd::add_hooks!(
         instant_shulk_attack_s3s,
@@ -570,8 +622,8 @@ pub fn install() {
         instant_shulk_attack_air_f,
         instant_shulk_attack_air_b,
         instant_shulk_attack_air_hi,
-        instant_shulk_attack_air_lw
-
-
+        instant_shulk_attack_air_lw,
+        instant_shulk_special_s,
+        instant_shulk_special_air_s
     );
 }
