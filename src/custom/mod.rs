@@ -7,7 +7,7 @@ use smash::*;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
-use smash::cpp::root::app::ItemKind;
+use smash::cpp::root::app::{ItemKind, GroundTouchFlag, SituationKind};
 
 
 // Use this for general per-frame fighter-level hooks
@@ -21,27 +21,20 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         //status kind 32 is dodging
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
-
         if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK{
             CancelModule::enable_cancel(module_accessor);
         }
         if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_100{
             CancelModule::enable_cancel(module_accessor);
         }
-        /*
-        if status_kind(module_accessor) == 103{
-           change_status_request_from_script(module_accessor, 83, true);
-        }
-        if status_kind(module_accessor) == 104{
-            change_status_request_from_script(module_accessor, 83, true);
-        }
-         */
         if StatusModule::status_kind(module_accessor) == 34{
+            CancelModule::enable_cancel(module_accessor);
+        }
+        if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_HI{
             CancelModule::enable_cancel(module_accessor);
         }
 
 
-        //println!("{}",StatusModule::status_kind(module_accessor) );
     }
 }
 
