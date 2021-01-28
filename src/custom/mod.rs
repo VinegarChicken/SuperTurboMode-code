@@ -9,14 +9,12 @@ use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
 use smash::cpp::root::app::{ItemKind, GroundTouchFlag, SituationKind};
 
-//l
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
         //status kind 83 is on the ground for missed tech
-        //status kind 87 is get up from missed tech.
         //status kind 103 is teching ground
-        //status kind 88 is rolling from ground missed tech
         //status kind 34 is air dodging
         //status kind 32 is dodging
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
