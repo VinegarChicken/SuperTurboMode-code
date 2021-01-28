@@ -9,7 +9,7 @@ use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
 use smash::cpp::root::app::{ItemKind, GroundTouchFlag, SituationKind};
 
-
+//l
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
