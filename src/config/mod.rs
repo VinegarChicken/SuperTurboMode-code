@@ -19,6 +19,7 @@ lazy_static::lazy_static! {
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Config {
     pub instant_info: InstantInfo,
+    pub misc: Miscellaneous,
     pub version_info: VersionInfo,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -41,6 +42,12 @@ pub struct VersionInfo {
     pub version_info: String,
 }
 
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct Miscellaneous {
+    pub airdodge_cancels: bool,
+    pub jab_cancels: bool,
+    pub up_special_cancels: bool,
+}
 
 impl Config {
     pub fn new() -> Self {
@@ -56,6 +63,11 @@ impl Config {
                 krool: true,
                 marth: true,
                 shulk: true,
+            },
+            misc: Miscellaneous {
+                airdodge_cancels: true,
+                jab_cancels: true,
+                up_special_cancels: true,
             },
             version_info: VersionInfo {
                 version_info: env!("CARGO_PKG_VERSION").to_string(),
