@@ -4,7 +4,6 @@ use smash::lua2cpp::{L2CFighterCommon,L2CFighterBase};
 use acmd::{acmd, acmd_func};
 use crate::config::CONFIG;
 use smash::app::lua_bind::*;
-
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_CLOUD,
