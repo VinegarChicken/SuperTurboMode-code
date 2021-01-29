@@ -20,7 +20,7 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
 
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
-        if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK{
+        if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK && CONFIG.misc.jab_cancels{
             CancelModule::enable_cancel(module_accessor);
         }
         if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_100 && CONFIG.misc.jab_cancels{
