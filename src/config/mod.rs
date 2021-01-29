@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::Write;
 use std::convert::From;
 
+
 use skyline::error::show_error;
 
 use semver::Version;
@@ -32,6 +33,7 @@ pub struct InstantInfo {
     pub ike: bool,
     pub krool: bool,
     pub marth: bool,
+    pub shulk: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -52,7 +54,8 @@ impl Config {
                 ganon: true,
                 ike: true,
                 krool: true,
-                marth: true
+                marth: true,
+                shulk: true,
             },
             version_info: VersionInfo {
                 version_info: env!("CARGO_PKG_VERSION").to_string(),

@@ -3,6 +3,8 @@ use smash::lib::lua_const::*;
 use smash::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use smash::app::lua_bind::*;
+use crate::config::CONFIG;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 
@@ -12,7 +14,11 @@ use acmd::{acmd, acmd_func};
 pub fn instant_dk_attack_11(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(4.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 4.0)
+            }
+		}
 		}
         frame(Frame=5)
 		if(is_excute){
@@ -38,7 +44,11 @@ pub fn instant_dk_attack_11(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_12(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(3.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 3.0)
+            }
+		}
 		}
 		frame(Frame=4)
 		if(is_excute){
@@ -62,7 +72,11 @@ pub fn instant_dk_attack_12(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_dash(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(7.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 7.0)
+            }
+		}
 		}
 		frame(Frame=8)
 		if (is_excute) {
@@ -91,7 +105,11 @@ pub fn instant_dk_attack_dash(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_s3hi(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(6.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 6.0)
+            }
+		}
 		}
 		frame(Frame=6)
 		if(is_excute){
@@ -122,7 +140,11 @@ pub fn instant_dk_attack_s3hi(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_s3s(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(6.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
 		frame(Frame=6)
 		if(is_excute){
@@ -153,7 +175,11 @@ pub fn instant_dk_attack_s3s(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_s3lw(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(6.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
 		frame(Frame=6)
 		if(is_excute){
@@ -184,7 +210,11 @@ pub fn instant_dk_attack_s3lw(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_hi3(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(5.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
 		frame(Frame=5)
 		FT_MOTION_RATE(1.0)
@@ -211,7 +241,11 @@ pub fn instant_dk_attack_hi3(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_lw3(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(5.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
 		frame(Frame=5)
 		FT_MOTION_RATE(1.0)
@@ -243,9 +277,12 @@ animcmd = "game_attacks4")]
 pub fn instant_dk_attack_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(16.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
 		}
-
+		}
 		frame(Frame=15)
 		if(is_excute){
 			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -260,7 +297,6 @@ pub fn instant_dk_attack_s4(fighter: &mut L2CFighterCommon) {
 			HIT_NODE(hash40("arml"), HIT_STATUS_XLU)
 			HIT_NODE(hash40("armr"), HIT_STATUS_XLU)
 		}
-
 		frame(Frame=22)
 		if(is_excute){
 			ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=24.0, Angle=46, KBG=88, FKB=0, BKB=21, Size=5.7, X=0.0, Y=6.4, Z=24.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_aura"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_FIRE, Type=ATTACK_REGION_PUNCH)
@@ -285,7 +321,11 @@ pub fn instant_dk_attack_s4(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_hi4(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(5.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
 		frame(Frame=7)
 		FT_MOTION_RATE(1.0)
@@ -325,7 +365,11 @@ pub fn instant_dk_attack_hi4(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_lw4(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(2.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 2.0)
+            }
+		}
 		}
 		frame(Frame=3)
 		FT_MOTION_RATE(1.0)
@@ -335,7 +379,11 @@ pub fn instant_dk_attack_lw4(fighter: &mut L2CFighterCommon) {
 		}
 		frame(4)
 		if (is_excute) {
-			MotionModule::set_rate(7.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 7.0)
+            }
+		}
 		}
 		frame(Frame=11)
 		if(is_excute){
@@ -370,7 +418,11 @@ pub fn instant_dk_attack_lw4(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_air_n(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(10.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 10.0)
+            }
+		}
 		}
 		frame(Frame=10)
 		if(is_excute){
@@ -407,9 +459,12 @@ pub fn instant_dk_attack_air_n(fighter: &mut L2CFighterCommon) {
     animcmd = "game_attackairf")]
 pub fn instant_dk_attack_air_f(fighter: &mut L2CFighterCommon) {
     acmd!({
-		if(is_excute){
-			WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-			MotionModule::set_rate(18.0)
+		if (is_excute) {
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 18.0)
+            }
+		}
 		}
 		frame(Frame=18)
 		FT_MOTION_RATE(1.0)
@@ -442,7 +497,11 @@ pub fn instant_dk_attack_air_f(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_air_b(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(6.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 6.0)
+            }
+		}
 		}
 		frame(Frame=6)
 		if (is_excute) {
@@ -480,7 +539,11 @@ pub fn instant_dk_attack_air_b(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_air_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(6.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 6.0)
+            }
+		}
 		}
 		frame(Frame=5)
 		if(is_excute){
@@ -512,7 +575,11 @@ pub fn instant_dk_attack_air_hi(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_attack_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(14.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 14.0)
+            }
+		}
 		}
 		frame(Frame=3)
 		if(is_excute){
@@ -543,7 +610,11 @@ pub fn instant_dk_attack_air_lw(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_n_max(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(9.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 9.0)
+            }
+		}
 		}
 		frame(Frame=18)
 		FT_MOTION_RATE(1.0)
@@ -574,7 +645,11 @@ animcmd = "game_specialn")]
 pub fn instant_dk_special_n(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(18.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 18.0)
+            }
+		}
 		}
 		frame(Frame=18)
 		if (is_excute) {
@@ -602,7 +677,11 @@ pub fn instant_dk_special_n(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_air_n_max(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(9.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 9.0)
+            }
+		}
 		}
 		frame(Frame=18)
 		FT_MOTION_RATE(1.0)
@@ -633,7 +712,11 @@ pub fn instant_dk_special_air_n_max(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_s(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(16.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 9.0)
+            }
+		}
 		}
 		frame(16)
 		if (is_excute) {
@@ -664,7 +747,11 @@ pub fn instant_dk_special_s(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_air_s(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(16.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
 		}
 		frame(16)
 		if (is_excute) {
@@ -695,7 +782,11 @@ pub fn instant_dk_special_air_s(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(19.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 19.0)
+            }
+		}
 		}
 		frame(Frame=19)
 		if(is_excute){
@@ -786,7 +877,11 @@ pub fn instant_dk_special_hi(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_lw_start(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(5.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
 		}
     });
 }
@@ -799,7 +894,11 @@ pub fn instant_dk_special_lw_start(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_lw_loop(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(4.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 4.0)
+            }
+		}
 		}
 		frame(Frame=5)
 		FT_MOTION_RATE(1.0)
@@ -851,7 +950,11 @@ pub fn instant_dk_special_lw_loop(fighter: &mut L2CFighterCommon) {
 pub fn instant_dk_special_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(19.0)
+		rust{
+		if CONFIG.instant_info.donkey_kong{
+            MotionModule::set_rate(module_accessor, 19.0)
+            }
+		}
 		}
 		frame(Frame=19)
 		if(is_excute){

@@ -1,7 +1,9 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -10,8 +12,12 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_ike_fair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(10.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 10.0)
+            }
+		}
 	}
 	frame(Frame=2)
 	if(is_excute){
@@ -43,9 +49,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn instant_ike_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(14.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 14.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -85,8 +95,12 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_ike_bair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(6.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor,6.0)
+            }
+		}
 	}
 	frame(Frame=3)
 	if(is_excute){
@@ -129,8 +143,12 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_ike_uair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=6)
 	if(is_excute){
@@ -163,8 +181,12 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn instant_ike_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=6)
 	if(is_excute){
@@ -198,8 +220,12 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn instant_ike_f_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(30.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 30.0)
+            }
+		}
 	}
 	frame(Frame=25)
 	if(is_excute){
@@ -235,8 +261,12 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn instant_ike_d_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=6)
 	if(is_excute){
@@ -285,20 +315,27 @@ pub fn instant_ike_d_smash(fighter: &mut L2CFighterCommon) {
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_IKE,
-animation = "attack_s4_hi",
-animcmd = "game_attacks4hi")]
+animation = "attack_hi4",
+animcmd = "game_attackhi4")]
 pub fn instant_ike_u_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(24.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 19.0)
+            }
+		}
 	}
 	frame(Frame=12)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 	}
+	frame(Frame=20)
+    if(is_execute){
+    MotionModule::set_rate(1.0)
+    }
 	frame(Frame=25)
 	if(is_excute){
-	MotionModule::set_rate(1.0)
 	ATTACK(ID=0, Part=0, Bone=hash40("sword"), Damage=17.0, Angle=82, KBG=86, FKB=0, BKB=50, Size=5.0, X=0.0, Y=0.0, Z=-2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
 	ATTACK(ID=1, Part=0, Bone=hash40("sword"), Damage=17.0, Angle=75, KBG=86, FKB=0, BKB=50, Size=5.0, X=0.0, Y=4.0, Z=-2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
 	ATTACK(ID=2, Part=0, Bone=hash40("sword"), Damage=17.0, Angle=70, KBG=86, FKB=0, BKB=50, Size=5.0, X=0.0, Y=7.5, Z=-2.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_cutup"), SFXLevel=ATTACK_SOUND_LEVEL_LL, SFXType=COLLISION_SOUND_ATTR_IKE, Type=ATTACK_REGION_SWORD)
@@ -323,12 +360,16 @@ pub fn instant_ike_u_smash(fighter: &mut L2CFighterCommon) {
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_IKE,
-animation = "attack_s3_hi",
-animcmd = "game_attacks3hi")]
+animation = "attack_hi3",
+animcmd = "game_attackhi3")]
 pub fn instant_ike_u_tilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=12)
 	if(is_excute){
@@ -342,20 +383,21 @@ pub fn instant_ike_u_tilt(fighter: &mut L2CFighterCommon) {
 	if(is_excute){
 	AttackModule::clear_all()
 	}
-
-
-
     });
 }
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_IKE,
-animation = "attack_s3_lw",
-animcmd = "game_attacks3lw")]
+animation = "attack_lw3",
+animcmd = "game_attacklw3")]
 pub fn instant_ike_d_tilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=12)
 	if(is_excute){
@@ -369,9 +411,6 @@ pub fn instant_ike_d_tilt(fighter: &mut L2CFighterCommon) {
 	if(is_excute){
 	AttackModule::clear_all()
 	}
-
-
-
     });
 }
 #[acmd_func(
@@ -381,8 +420,12 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_ike_s_tilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(13.0)
+	if (is_excute) {
+		rust{
+		if CONFIG.instant_info.ike{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
 	}
 	frame(Frame=13)
 	if(is_excute){

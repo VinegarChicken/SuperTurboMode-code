@@ -27,7 +27,10 @@ mod drmario;
 mod ness;
 mod roy;
 mod corrin;
-mod sephiroth;
+mod config;
+
+
+//mod sephiroth;
 
 
 
@@ -56,5 +59,6 @@ pub fn main() {
     ness::install();
     roy::install();
     corrin::install();
+    config::main();
     //sephiroth::install();
 }
