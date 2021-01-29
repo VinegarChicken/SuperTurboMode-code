@@ -1,8 +1,9 @@
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
-
+use crate::config::CONFIG;
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_SHULK,
@@ -10,9 +11,13 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_shulk_attack_s3s(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(11.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 11.0)
+            }
+		}
+	}
     frame(Frame=11)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -38,9 +43,13 @@ animation = "attack_hi3",
 animcmd = "game_attackhi3")]
 pub fn instant_shulk_attack_hi3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(14.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 14.0)
+            }
+		}
+	}
     frame(Frame=14)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -70,9 +79,13 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn instant_shulk_attack_lw3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(9.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 9.0)
+            }
+		}
+	}
     frame(Frame=9)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -100,9 +113,13 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn instant_shulk_fsmash(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     frame(Frame=13)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -140,9 +157,13 @@ animation = "attack_s4_hi",
 animcmd = "game_attacks4hi")]
 pub fn instant_shulk_fsmashhi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     frame(Frame=13)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -180,9 +201,13 @@ animation = "attack_s4_lw",
 animcmd = "game_attacks4lw")]
 pub fn instant_shulk_fsmashlw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     frame(Frame=13)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -220,9 +245,13 @@ animation = "attack_hi4",
 animcmd = "game_attackhi4")]
 pub fn instant_shulk_attack_hi4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(16.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
+	}
     frame(Frame=11)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -272,9 +301,13 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn instant_shulk_attack_lw4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(16.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -353,9 +386,13 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn instant_shulk_attack_air_n(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(12.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -389,9 +426,13 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_shulk_attack_air_f(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -428,9 +469,13 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_shulk_attack_air_b(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(18.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 18.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -469,9 +514,13 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_shulk_attack_air_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     if(is_excute){
         FighterAreaModuleImpl::enable_fix_jostle_area(3.5, 3.5)
     }
@@ -521,6 +570,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn instant_shulk_attack_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     if(is_excute){
         FighterAreaModuleImpl::enable_fix_jostle_area(3.0, 2.5)
     }
@@ -530,6 +586,7 @@ pub fn instant_shulk_attack_air_lw(fighter: &mut L2CFighterCommon) {
     }
     frame(Frame=14)
     if(is_excute){
+        MotionModule::set_rate(1.0)
         ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=6.0, Angle=215, KBG=100, FKB=15, BKB=0, Size=5.3, X=0.0, Y=4.0, Z=0.8, X2=0.0, Y2=1.0, Z2=0.8, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
         ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=7.5, Angle=160, KBG=100, FKB=20, BKB=0, Size=5.3, X=0.0, Y=4.0, Z=0.8, X2=0.0, Y2=1.0, Z2=0.8, Hitlag=1.2, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_KICK, Type=ATTACK_REGION_SWORD)
     }
@@ -563,9 +620,13 @@ animation = "special_s",
 animcmd = "game_specials")]
 pub fn instant_shulk_special_s(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(29.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 29.0)
+            }
+		}
+	}
     frame(Frame=30)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -590,9 +651,13 @@ animation = "special_air_s",
 animcmd = "game_specialairs")]
 pub fn instant_shulk_special_air_s(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(29.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.shulk{
+            MotionModule::set_rate(module_accessor, 29.0)
+            }
+		}
+	}
     frame(Frame=30)
     if(is_execute){
     MotionModule::set_rate(1.0)
