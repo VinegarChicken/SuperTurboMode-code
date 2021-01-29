@@ -2,6 +2,9 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon,L2CFighterBase};
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
+
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
 battle_object_kind = FIGHTER_KIND_CLOUD,
@@ -9,9 +12,13 @@ animation = "attack_11",
 animcmd = "game_attack11")]
 pub fn cloud_attack_11(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(3.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 3.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -46,9 +53,13 @@ animation = "attack_12",
 animcmd = "game_attack12")]
 pub fn cloud_attack_12(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(4.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 4.0)
+            }
+		}
+	}
     frame(Frame=4)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -76,9 +87,13 @@ animation = "attack_13",
 animcmd = "game_attack13")]
 pub fn cloud_attack_13(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(5.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -102,9 +117,13 @@ animation = "attack_dash",
 animcmd = "game_attackdash")]
 pub fn cloud_instant_attack_dash(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(8.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 8.0)
+            }
+		}
+	}
     frame(Frame=8)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -135,9 +154,13 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_cloud_attack_s3s(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(8.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 8.0)
+            }
+		}
+	}
     frame(Frame=8)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -160,9 +183,13 @@ animation = "attack_hi3",
 animcmd = "game_attackhi3")]
 pub fn instant_cloud_attack_hi3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(5.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
+	}
     frame(frame=5)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -193,9 +220,13 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn instant_cloud_attack_lw3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(6.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
+	}
     frame(Frame=6)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -227,9 +258,13 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn instant_cloud_attack_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(10.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 10.0)
+            }
+		}
+	}
     frame(Frame=6)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -287,9 +322,13 @@ animation = "attack_hi4",
 animcmd = "game_attackhi4")]
 pub fn instant_cloud_attack_hi4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(13.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
+	}
     frame(Frame=7)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -330,9 +369,13 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn instant_cloud_attack_lw4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(5.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -377,9 +420,13 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn instant_cloud_attack_air_n(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(4.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 4.0)
+            }
+		}
+	}
     frame(Frame=2)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -414,9 +461,13 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_cloud_attack_air_f(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(16.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -461,9 +512,13 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_cloud_attack_air_b(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(10.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 10.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -498,9 +553,13 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_cloud_attack_air_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(7.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 7.0)
+            }
+		}
+	}
     frame(Frame=2)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -545,9 +604,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn instant_cloud_attack_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(10.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 10.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -584,9 +647,13 @@ animation = "special_n",
 animcmd = "game_specialn")]
 pub fn instant_cloud_special_n(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(15.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 15.0)
+            }
+		}
+	}
     frame(Frame=10)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
@@ -618,9 +685,13 @@ animation = "special_air_n",
 animcmd = "game_specialairn")]
 pub fn instant_cloud_special_air_n(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(15.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.cloud{
+            MotionModule::set_rate(module_accessor, 15.0)
+            }
+		}
+	}
     frame(Frame=10)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_CLOUD_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
