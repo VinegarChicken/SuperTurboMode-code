@@ -24,7 +24,6 @@ pub struct Config {
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
-    //tests
     pub donkey_kong: bool,
     pub captain_falcon: bool,
     pub corrin: bool,
@@ -35,6 +34,9 @@ pub struct InstantInfo {
     pub krool: bool,
     pub marth: bool,
     pub shulk: bool,
+    pub roy: bool,
+    pub bowser: bool,
+    pub charizard: bool
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -63,6 +65,9 @@ impl Config {
                 krool: true,
                 marth: true,
                 shulk: true,
+                roy: true,
+                bowser: true,
+                charizard: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
