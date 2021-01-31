@@ -28,7 +28,7 @@ mod ness;
 mod roy;
 mod corrin;
 mod config;
-
+mod charizard;
 
 //mod sephiroth;
 
@@ -59,6 +59,7 @@ pub fn main() {
     ness::install();
     roy::install();
     corrin::install();
+    charizard::install();
     config::main();
     //sephiroth::install();
 }
