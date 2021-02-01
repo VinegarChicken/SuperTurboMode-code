@@ -2,6 +2,8 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -10,17 +12,25 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn roy_instant_fire_fair(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-	    WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-	    MotionModule::set_rate(12.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 12.0)
+        }
+        }
+      WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
+    }
 	frame(Frame=13)
 	if(is_excute){
 	    MotionModule::set_rate(1.0)
 	    ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=4.8, X=0.0, Y=13.0, Z=4.0, X2=0.0, Y2=10.0, Z2=4.0, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
 	    ATTACK(ID=1, Part=0, Bone=hash40("armr"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=4.2, X=0.0, Y=0.0, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
 	    ATTACK(ID=2, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=0.7, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
-	    ATTACK(ID=3, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=7.2, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.7, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+	    ATTACK(ID=3, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=3.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+	    ATTACK(ID=4, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=5.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+	    ATTACK(ID=5, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=7.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+	    ATTACK(ID=6, Part=0, Bone=hash40("sword1"), Damage=13.0, Angle=42, KBG=83, FKB=0, BKB=50, Size=3.5, X=0.0, Y=0.0, Z=9.5, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=1.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
+
 	}
 	wait(Frames=3)
 	if(is_excute){
@@ -40,10 +50,16 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn roy_instant_fire_uair(fighter: &mut L2CFighterCommon) {
     acmd!({
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 4.0)
+        }
+        }
+    }
     frame(Frame=3)
 	if(is_excute){
 	    WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
-	    MotionModule::set_rate(4.0)
 	}
 	frame(Frame=5)
 	if(is_excute){
@@ -72,11 +88,17 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn roy_instant_fire_bair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        frame(Frame=3)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 7.0)
+        }
+        }
+    }
+    frame(Frame=3)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 	REVERSE_LR()
-	MotionModule::set_rate(7.0)
 	}
 	frame(Frame=8)
 	if(is_excute){
@@ -104,20 +126,17 @@ animcmd = "game_attacks4")]
 pub fn roy_instant_fire_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
 	if (is_excute) {
-	MotionModule::set_rate(6.0)
-		}
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 13.0)
+        }
+        }
+    }
 	frame(Frame=7)
 	if(is_excute){
-	MotionModule::set_rate(1.0)
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
 	}
-	if (is_excute) {
-	MotionModule::set_rate(5.0)
-	}
-	frame(Frame=12)
-	FT_MOTION_RATE(FSM=0.5)
 	frame(Frame=14)
-	FT_MOTION_RATE(FSM=1)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
 	ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=23.0, Angle=361, KBG=75, FKB=0, BKB=60, Size=3.3, X=0.0, Y=7.7, Z=9.1, X2=0.0, Y2=7.7, Z2=7.0, Hitlag=1.4, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_fire"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ROY_HIT, Type=ATTACK_REGION_SWORD)
@@ -139,9 +158,13 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn roy_instant_fire_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	MotionModule::set_rate(5.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 5.0)
+        }
+        }
+    }
 	frame(Frame=2)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -184,10 +207,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn roy_instant_fire_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	MotionModule::set_rate(15.0)
-	}
-
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 15.0)
+        }
+        }
+    }
 	frame(Frame=16)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -212,9 +238,13 @@ animation = "attack_hi3",
 animcmd = "game_attackhi3")]
 pub fn roy_instant_fire_u_tilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	MotionModule::set_rate(5.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 5.0)
+        }
+        }
+    }
 	frame(Frame=6)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -245,9 +275,13 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn roy_instant_fire_d_tilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	MotionModule::set_rate(6.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 6.0)
+        }
+        }
+    }
 	frame(Frame=7)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -298,9 +332,13 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn roy_instant_fire_d_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	MotionModule::set_rate(4.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 4.0)
+        }
+        }
+    }
 	frame(Frame=4)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -344,8 +382,12 @@ animcmd = "game_attack11")]
 pub fn roy_instant_fire_jab(fighter: &mut L2CFighterCommon) {
     acmd!({
 	if (is_excute) {
-		MotionModule::set_rate(4.0)
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 4.0)
         }
+        }
+    }
 	frame(Frame=5)
 	if(is_excute){
 	//FighterAreaModuleImpl::enable_fix_jostle_area(5, 5)
@@ -367,9 +409,13 @@ animation = "special_lw",
 animcmd = "game_speciallw")]
 pub fn roy_instant_fire_d_special(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_execute){
-	    MotionModule::set_rate(27.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 27.0)
+        }
+        }
+    }
 	frame(Frame=8)
 	if(is_excute){
 	    WorkModule::on_flag(Flag=FIGHTER_ROY_STATUS_SPECIAL_LW_FLAG_SHIELD)
@@ -390,10 +436,15 @@ animation = "special_n_end_max",
 animcmd = "game_specialnendmax")]
 pub fn roy_instant_fire_n_special_max(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
-	MotionModule::set_rate(9.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 9.0)
+        }
+        }
+        KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+
+    }
 	frame(Frame=10)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -416,10 +467,15 @@ animation = "special_n_end",
 animcmd = "game_specialnend")]
 pub fn roy_instant_fire_n_special(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
-	MotionModule::set_rate(9.0)
-	}
+if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 9.0)
+        }
+        }
+        KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+
+    }
 	frame(Frame=10)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -441,10 +497,15 @@ animation = "special_n_end_1",
 animcmd = "game_specialnend1")]
 pub fn roy_instant_fire_n_special1(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
-	MotionModule::set_rate(9.0)
-	}
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 9.0)
+        }
+        }
+        KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+
+    }
 	frame(Frame=10)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -466,10 +527,15 @@ animation = "special_n_end_2",
 animcmd = "game_specialnend2")]
 pub fn roy_instant_fire_n_special2(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
-	MotionModule::set_rate(9.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.roy{
+            MotionModule::set_rate(module_accessor, 9.0)
+        }
+        }
+        KineticModule::set_consider_ground_friction(false, KINETIC_ENERGY_RESERVE_ATTRIBUTE_MAIN)
+
+    }
 	frame(Frame=10)
 	if(is_excute){
 	MotionModule::set_rate(1.0)

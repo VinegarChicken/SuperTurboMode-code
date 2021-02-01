@@ -3,13 +3,14 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon, L2CFighterBase};
 use smash::hash40;
 use smash::lib::lua_const::*;
+use smash::params::*;
 use smash::*;
 use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
-use smash::cpp::root::app::{ItemKind, GroundTouchFlag, SituationKind};
 use crate::config::CONFIG;
 use crate::config;
+
 // Use this for general per-frame fighter-level hooks
 pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
     unsafe {
@@ -17,9 +18,20 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         //status kind 103 is teching ground
         //status kind 34 is air dodging
         //status kind 32 is dodging
-
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
+        /*
+        if fighter_kind == *FIGHTER_KIND_ROY{
+            if CONFIG.roy_changes.giant_sword{
+                let scale = smash::phx::Vector3f{x:CONFIG.roy_changes.giant_sword_scale_x.parse().unwrap(),y:CONFIG.roy_changes.giant_sword_scale_y.parse().unwrap(),z: CONFIG.roy_changes.giant_sword_scale_z.parse().unwrap()};
+                ModelModule::set_joint_scale(module_accessor, smash::phx::Hash40::new("sword1"), &scale);
+            }
+
+        }
+         */
+        if WorkModule::is_flag(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) && CONFIG.misc.infinite_airdodges{
+            WorkModule::off_flag(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR)
+        }
         if status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK && CONFIG.misc.jab_cancels{
             CancelModule::enable_cancel(module_accessor);
         }
@@ -29,10 +41,9 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         if StatusModule::status_kind(module_accessor) == 34 && CONFIG.misc.airdodge_cancels{
             CancelModule::enable_cancel(module_accessor);
         }
-        if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_HI && CONFIG.misc.up_special_cancels{
+        if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_SPECIAL_HI && MotionModule::frame(module_accessor) != MotionModule::end_frame(module_accessor) && CONFIG.misc.up_special_cancels{
             CancelModule::enable_cancel(module_accessor);
         }
-
 
     }
 }

@@ -2,6 +2,8 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon,L2CFighterBase};
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -10,9 +12,13 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_corrin_attack_s3s(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(6.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 6.0)
+            }
+		}
+	}
     frame(Frame=7)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -36,9 +42,13 @@ animation = "attack_hi3",
 animcmd = "game_attackhi3")]
 pub fn instant_corrin_attack_hi3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(5.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 5.0)
+            }
+		}
+	}
     frame(Frame=6)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -71,9 +81,13 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn instant_corrin_attack_lw3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(3.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 3.0)
+            }
+		}
+	}
     frame(Frame=4)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -109,9 +123,13 @@ animation = "attack_hi4",
 animcmd = "game_attackhi4")]
 pub fn instant_corrin_attack_hi4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(11.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 11.0)
+            }
+		}
+	}
     frame(Frame=10)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -137,9 +155,13 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn instant_corrin_attack_lw4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(11.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 11.0)
+            }
+		}
+	}
     frame(Frame=9)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -168,12 +190,16 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn instant_corrin_attack_air_n(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-        MotionModule::set_rate(4.0)
-        ArticleModule::generate_article(FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND,false,0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 4.0)
+            }
+		}
+		ArticleModule::generate_article(FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND,false,0)
         //as_hash__const(FIGHTER_KAMUI_GENERATE_ARTICLE_SPEARHAND, hash40("attack_air_n"))
         ArticleModule::change_motion(0,smash::phx::Hash40::new("attack_air_n"),false,0.0)
-    }
+	}
     frame(Frame=5)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -216,8 +242,12 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_corrin_attack_air_f(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(11.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 11.0)
+        }
+        }
     }
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -251,8 +281,12 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_corrin_attack_air_b(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(11.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 11.0)
+        }
+        }
     }
     frame(Frame=6)
     if(is_excute){
@@ -290,8 +324,12 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_corrin_attack_air_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(5.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.corrin{
+            MotionModule::set_rate(module_accessor, 5.0)
+        }
+        }
     }
     frame(Frame=4)
     if(is_excute){

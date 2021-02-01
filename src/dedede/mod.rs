@@ -2,6 +2,8 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -10,10 +12,14 @@ animation = "special_lw",
 animcmd = "game_speciallw")]
 pub fn dedede_special_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-        MotionModule::set_rate(8.0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 8.0)
+            }
+		}
         sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 14)
-    }
+	}
     frame(Frame=8)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -41,10 +47,14 @@ animation = "special_lw_max",
 animcmd = "game_speciallwmax")]
 pub fn dedede_special_lw_max(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-        MotionModule::set_rate(8.0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 8.0)
+            }
+		}
         sv_module_access::damage(MA_MSC_DAMAGE_DAMAGE_NO_REACTION, DAMAGE_NO_REACTION_MODE_DAMAGE_POWER, 14)
-    }
+	}
     frame(Frame=8)
     if(is_execute){
     MotionModule::set_rate(1.0)
@@ -72,9 +82,13 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn dedede_fair(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(12.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 12.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -106,9 +120,13 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn dedede_bair(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-        MotionModule::set_rate(16.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
+	}
     frame(Frame=5)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -142,9 +160,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn dedede_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-        MotionModule::set_rate(21.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 21.0)
+            }
+		}
+	}
     frame(Frame=7)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -177,8 +199,12 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn dedede_f_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-		MotionModule::set_rate(39.0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 39.0)
+            }
+		}
 	}
     frame(Frame=34)
     if(is_excute){
@@ -220,8 +246,12 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn dedede_d_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-		MotionModule::set_rate(13.0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 13.0)
+            }
+		}
 	}
     frame(Frame=6)
     if(is_excute){
@@ -250,8 +280,12 @@ animation = "attack_hi4",
 animcmd = "game_attackhi4")]
 pub fn dedede_hi_smash(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
-		MotionModule::set_rate(16.0)
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.dedede{
+            MotionModule::set_rate(module_accessor, 16.0)
+            }
+		}
 	}
     frame(Frame=7)
     if(is_excute){

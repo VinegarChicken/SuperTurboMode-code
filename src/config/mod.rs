@@ -21,6 +21,8 @@ pub struct Config {
     pub instant_info: InstantInfo,
     pub misc: Miscellaneous,
     pub version_info: VersionInfo,
+    pub ganon_changes: GanondorfChanges,
+    pub roy_changes: RoyChanges,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
@@ -36,17 +38,34 @@ pub struct InstantInfo {
     pub shulk: bool,
     pub roy: bool,
     pub bowser: bool,
-    pub charizard: bool
+    pub charizard: bool,
+    pub drmario: bool,
+    pub ivysaur: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct VersionInfo {
     pub version_info: String,
 }
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct GanondorfChanges {
+    pub rng_ganon_u_smash: bool,
+    pub rng_ganon_f_smash: bool,
+    pub rng_ganon_u_smash_chances_upper: String,
+    pub rng_ganon_f_smash_chances_upper: String,
+}
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct RoyChanges {
+    pub giant_sword: bool,
+    pub giant_sword_scale_x: String,
+    pub giant_sword_scale_y: String,
+    pub giant_sword_scale_z: String,
 
+}
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Miscellaneous {
     pub airdodge_cancels: bool,
+    pub infinite_airdodges: bool,
     pub jab_cancels: bool,
     pub up_special_cancels: bool,
 }
@@ -68,11 +87,26 @@ impl Config {
                 roy: true,
                 bowser: true,
                 charizard: true,
+                drmario: true,
+                ivysaur: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
+                infinite_airdodges: true,
                 jab_cancels: true,
                 up_special_cancels: true,
+            },
+            ganon_changes: GanondorfChanges{
+                rng_ganon_u_smash: true,
+                rng_ganon_f_smash: true,
+                rng_ganon_u_smash_chances_upper: 5.to_string(),
+                rng_ganon_f_smash_chances_upper: 5.to_string(),
+            },
+            roy_changes: RoyChanges{
+                giant_sword: false,
+                giant_sword_scale_x: 5.to_string(),
+                giant_sword_scale_y: 5.to_string(),
+                giant_sword_scale_z: 5.to_string(),
             },
             version_info: VersionInfo {
                 version_info: env!("CARGO_PKG_VERSION").to_string(),
@@ -104,7 +138,6 @@ impl Config {
                 if Version::parse(&config.version_info.version_info) < Version::parse(&env!("CARGO_PKG_VERSION").to_string()) {
                     println!("Super turbo mode: Configuration file version mismatch");
                     skyline_web::DialogOk::ok(format!("Updating configuration file to latest format"));
-
                     config.version_info.version_info = env!("CARGO_PKG_VERSION").to_string();
                     config.update();
                     config.save().unwrap();

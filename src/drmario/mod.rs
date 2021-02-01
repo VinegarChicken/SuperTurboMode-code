@@ -2,6 +2,8 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::{L2CFighterCommon,L2CFighterBase};
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -47,9 +49,13 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_dmario_attack_air_f(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(14.0)
-    }
+    if (is_excute) {
+		rust{
+		if CONFIG.instant_info.drmario{
+            MotionModule::set_rate(module_accessor, 14.0)
+            }
+		}
+	}
     frame(Frame=3)
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)

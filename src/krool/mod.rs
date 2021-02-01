@@ -3,6 +3,8 @@ use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use smash::*;
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -11,9 +13,13 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_king_krool_fair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        if(is_excute){
-	MotionModule::set_rate(10.0)
-	}
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 10.0)
+        }
+        }
+    }
         frame(Frame=3)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -52,10 +58,14 @@ animation = "attack_air_n",
 animcmd = "game_attackairn")]
 pub fn instant_king_krool_nair(fighter: &mut L2CFighterCommon) {
     acmd!({
-        if(is_excute){
-	MotionModule::set_rate(6.0)
-	}
-        frame(Frame=4)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 6.0)
+        }
+        }
+    }
+    frame(Frame=4)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
 	}
@@ -91,9 +101,13 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_king_krool_bair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(17.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 17.0)
+        }
+        }
+    }
        frame(Frame=4)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -128,9 +142,13 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_king_krool_uair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(6.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 6.0)
+        }
+        }
+    }
        frame(Frame=3)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -174,9 +192,13 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn instant_king_krool_dair(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(13.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 13.0)
+        }
+        }
+    }
         frame(Frame=4)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -219,9 +241,13 @@ animation = "attack_lw4",
 animcmd = "game_attacklw4")]
 pub fn instant_king_krool_dsmash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(21.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 21.0)
+        }
+        }
+    }
 	frame(Frame=1)
 	if(is_excute){
 	JostleModule::set_status(false)
@@ -267,9 +293,13 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn instant_king_krool_fsmash(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(17.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 17.0)
+        }
+        }
+    }
 	frame(Frame=10)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -296,9 +326,13 @@ animation = "attack_s4_hi",
 animcmd = "game_attacks4hi")]
 pub fn instant_king_krool_fsmashhi(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(17.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 17.0)
+        }
+        }
+    }
 	frame(Frame=10)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -322,9 +356,13 @@ animation = "attack_s4_lw",
 animcmd = "game_attacks4lw")]
 pub fn instant_king_krool_fsmashlw(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(17.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 17.0)
+        }
+        }
+    }
 	frame(Frame=10)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_FLAG_START_SMASH_HOLD)
@@ -352,9 +390,13 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn instant_king_krool_dtilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(12.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 12.0)
+        }
+        }
+    }
 	frame(Frame=13)
 	if(is_excute){
 	MotionModule::set_rate(1.0)
@@ -384,9 +426,13 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_king_krool_stilt(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(11.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 11.0)
+        }
+        }
+    }
 	frame(Frame=5)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_KROOL_INSTANCE_WORK_ID_FLAG_REQUEST_WAIST_SHIELD_ON)
@@ -412,9 +458,13 @@ animation = "attack_s3_hi",
 animcmd = "game_attacks3hi")]
 pub fn instant_king_krool_stilthi(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(11.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 11.0)
+        }
+        }
+    }
 	frame(Frame=5)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_KROOL_INSTANCE_WORK_ID_FLAG_REQUEST_WAIST_SHIELD_ON)
@@ -439,9 +489,13 @@ animation = "attack_s3_lw",
 animcmd = "game_attacks3lw")]
 pub fn instant_king_krool_stiltlw(fighter: &mut L2CFighterCommon) {
     acmd!({
-	if(is_excute){
-	MotionModule::set_rate(11.0)
-	}
+	if (is_excute) {
+        rust{
+            if CONFIG.instant_info.krool{
+            MotionModule::set_rate(module_accessor, 11.0)
+        }
+        }
+    }
 	frame(Frame=5)
 	if(is_excute){
 	WorkModule::on_flag(Flag=FIGHTER_KROOL_INSTANCE_WORK_ID_FLAG_REQUEST_WAIST_SHIELD_ON)

@@ -3,6 +3,11 @@
 
 
 
+use skyline::*;
+use std::ffi::CStr;
+use smash::resource::{LoadedTables, find_subsequence};
+use skyline::hooks::getRegionAddress;
+
 mod mario;
 mod falco;
 mod custom;
@@ -32,8 +37,6 @@ mod charizard;
 
 //mod sephiroth;
 
-
-
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
     mario::install();
@@ -49,7 +52,7 @@ pub fn main() {
     dedede::install();
     cloud::install();
     squirtle::install();
-    samusanddarksamus::install();
+    //samusanddarksamus::install();
     marth::install();
     krool::install();
     ike::install();

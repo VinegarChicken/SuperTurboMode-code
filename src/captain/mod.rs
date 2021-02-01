@@ -2,6 +2,8 @@ use smash::hash40;
 use smash::lib::lua_const::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
+use crate::config::CONFIG;
+use smash::app::lua_bind::*;
 
 #[acmd_func(
 battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
@@ -10,8 +12,12 @@ animation = "attack_s4_s",
 animcmd = "game_attacks4")]
 pub fn instant_captain_attack_s4(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(18.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 18.0)
+        }
+        }
     }
     frame(Frame=12)
     if(is_excute){
@@ -38,8 +44,12 @@ animation = "special_n",
 animcmd = "game_specialn")]
 pub fn captain_n_special(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(50.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 50.0)
+        }
+        }
     }
     frame(Frame=15)
     if(is_excute){
@@ -70,8 +80,12 @@ animation = "special_air_n",
 animcmd = "game_specialairn")]
 pub fn captain_air_n_special(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(50.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 50.0)
+        }
+        }
     }
     frame(Frame=15)
     if(is_excute){
@@ -113,10 +127,14 @@ animation = "special_lw",
 animcmd = "game_speciallw")]
 pub fn captain_special_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_excute){
+    if (is_excute) {
         sv_animcmd::EFFECT_FOLLOW(/*Effect*/ hash40("sys_hit_elec_s"), /*Bone*/ hash40("rot"), /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*XRot*/ 0, /*YRot*/ 0, /*ZRot*/ 0, /*Size?*/ 2.7, true)
         ATTACK(ID=0, Part=0, Bone=hash40("legr"), Damage=15.0, Angle=52, KBG=88, FKB=0, BKB=60, Size=3.8, X=10.0, Y=0.0, Z=0.0, X2=2.0, Y2=0.0, Z2=0.0, Hitlag=1.0, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_ON, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_GA, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_paralyze"), SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_ELEC, Type=ATTACK_REGION_KICK)
-        MotionModule::set_rate(17.0)
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 17.0)
+        }
+        }
         JostleModule::set_status(false)
     }
     wait(Frames=1)
@@ -150,9 +168,13 @@ animation = "special_air_lw",
 animcmd = "game_specialairlw")]
 pub fn captain_special_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    sv_animcmd::EFFECT_FOLLOW(/*Effect*/ hash40("sys_hit_elec_s"), /*Bone*/ hash40("rot"), /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*XRot*/ 0, /*YRot*/ 0, /*ZRot*/ 0, /*Size?*/ 2.7, true)
-    MotionModule::set_rate(14.0)
+    if (is_excute) {
+        sv_animcmd::EFFECT_FOLLOW(/*Effect*/ hash40("sys_hit_elec_s"), /*Bone*/ hash40("rot"), /*X*/ 0.0, /*Y*/ 0.0, /*Z*/ 0.0, /*XRot*/ 0, /*YRot*/ 0, /*ZRot*/ 0, /*Size?*/ 2.7, true)
+        rust{
+        if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 14.0)
+        }
+        }
     }
     frame(Frame=15)
     if(is_execute){
@@ -187,8 +209,12 @@ animation = "attack_hi3",
 animcmd = "game_attackhi3")]
 pub fn instant_captain_attack_hi3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(15.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 15.0)
+        }
+        }
     }
     frame(Frame=16)
     if(is_execute){
@@ -218,8 +244,12 @@ animation = "attack_lw3",
 animcmd = "game_attacklw3")]
 pub fn instant_captain_attack_lw3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(10.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 10.0)
+        }
+        }
     }
     frame(Frame=11)
     if(is_excute){
@@ -243,8 +273,12 @@ animation = "attack_s3_s",
 animcmd = "game_attacks3")]
 pub fn instant_captain_attack_s3(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(8.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 8.0)
+        }
+        }
     }
     frame(Frame=9)
     if(is_excute){
@@ -267,8 +301,12 @@ animation = "attack_s3_lw",
 animcmd = "game_attacks3lw")]
 pub fn instant_captain_attack_s3lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(8.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 8.0)
+        }
+        }
     }
     frame(Frame=9)
     if(is_excute){
@@ -291,8 +329,12 @@ animation = "attack_s3_hi",
 animcmd = "game_attacks3hi")]
 pub fn instant_captain_attack_s3hi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(8.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 8.0)
+        }
+        }
     }
     frame(Frame=9)
     if(is_excute){
@@ -315,8 +357,12 @@ animation = "attack_air_f",
 animcmd = "game_attackairf")]
 pub fn instant_captain_knee_of_justice(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-    MotionModule::set_rate(12.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 12.0)
+        }
+        }
     }
     frame(Frame=5)
     if(is_excute){
@@ -357,8 +403,12 @@ animation = "attack_air_b",
 animcmd = "game_attackairb")]
 pub fn instant_captain_attack_air_b(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(9.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 9.0)
+        }
+        }
     }
     frame(Frame=5)
     if(is_excute){
@@ -395,8 +445,12 @@ animation = "attack_air_hi",
 animcmd = "game_attackairhi")]
 pub fn instant_captain_attack_air_hi(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(6.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 6.0)
+        }
+        }
     }
     if(is_excute){
         WorkModule::on_flag(Flag=FIGHTER_STATUS_ATTACK_AIR_FLAG_ENABLE_LANDING)
@@ -431,8 +485,12 @@ animation = "attack_air_lw",
 animcmd = "game_attackairlw")]
 pub fn instant_captain_attack_air_lw(fighter: &mut L2CFighterCommon) {
     acmd!({
-    if(is_execute){
-        MotionModule::set_rate(15.0)
+    if (is_excute) {
+        rust{
+            if CONFIG.instant_info.captain_falcon{
+            MotionModule::set_rate(module_accessor, 15.0)
+        }
+        }
     }
     frame(Frame=4)
     if(is_excute){
