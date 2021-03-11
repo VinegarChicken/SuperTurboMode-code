@@ -35,6 +35,7 @@ mod corrin;
 mod config;
 mod charizard;
 
+
 //mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]

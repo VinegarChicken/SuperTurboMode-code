@@ -22,7 +22,6 @@ semver = "0.11.0"
 skyline-web = { git = "https://github.com/skyline-rs/skyline-web" }
 serde = { version = "1", features = ["derive"] }
 
-
 [profile.dev]
 panic = "abort"
 

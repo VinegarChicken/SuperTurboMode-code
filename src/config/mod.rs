@@ -45,7 +45,7 @@ pub struct InstantInfo {
 
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct VersionInfo {
-    pub version_info: String,
+    pub version_num: String,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct GanondorfChanges {
@@ -68,6 +68,7 @@ pub struct Miscellaneous {
     pub infinite_airdodges: bool,
     pub jab_cancels: bool,
     pub up_special_cancels: bool,
+    pub aerial_smash_attacks: bool,
 }
 
 impl Config {
@@ -95,6 +96,7 @@ impl Config {
                 infinite_airdodges: true,
                 jab_cancels: true,
                 up_special_cancels: true,
+                aerial_smash_attacks: true,
             },
             ganon_changes: GanondorfChanges{
                 rng_ganon_u_smash: true,
@@ -109,7 +111,7 @@ impl Config {
                 giant_sword_scale_z: 5.to_string(),
             },
             version_info: VersionInfo {
-                version_info: env!("CARGO_PKG_VERSION").to_string(),
+                version_num: env!("CARGO_PKG_VERSION").to_string(),
             },
             .. Config::default()
         }
@@ -135,10 +137,10 @@ impl Config {
                 };
 
                 // Make sure the version matches with the current release
-                if Version::parse(&config.version_info.version_info) < Version::parse(&env!("CARGO_PKG_VERSION").to_string()) {
+                if Version::parse(&config.version_info.version_num) < Version::parse(&env!("CARGO_PKG_VERSION").to_string()) {
                     println!("Super turbo mode: Configuration file version mismatch");
                     skyline_web::DialogOk::ok(format!("Updating configuration file to latest format"));
-                    config.version_info.version_info = env!("CARGO_PKG_VERSION").to_string();
+                    config.version_info.version_num = env!("CARGO_PKG_VERSION").to_string();
                     config.update();
                     config.save().unwrap();
 
@@ -162,7 +164,7 @@ impl Config {
     }
 
     fn update(&mut self) {
-        self.version_info.version_info = env!("CARGO_PKG_VERSION").to_string();
+        self.version_info.version_num = env!("CARGO_PKG_VERSION").to_string();
     }
     pub fn save(&self) -> Result<(), std::io::Error> {
         let config_txt = toml::to_vec(&self).unwrap();
