@@ -34,8 +34,7 @@ mod roy;
 mod corrin;
 mod config;
 mod charizard;
-
-
+mod wolf;
 //mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]
@@ -65,5 +64,6 @@ pub fn main() {
     corrin::install();
     charizard::install();
     config::main();
+    wolf::install();
     //sephiroth::install();
 }

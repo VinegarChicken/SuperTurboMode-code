@@ -128,7 +128,7 @@ pub fn roy_instant_fire_s4(fighter: &mut L2CFighterCommon) {
 	if (is_excute) {
         rust{
             if CONFIG.instant_info.roy{
-            MotionModule::set_rate(module_accessor, 13.0)
+            MotionModule::set_frame(module_accessor, 13.0, true)
         }
         }
     }

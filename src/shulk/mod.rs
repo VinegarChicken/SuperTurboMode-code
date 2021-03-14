@@ -15,7 +15,7 @@ pub fn instant_shulk_attack_s3s(fighter: &mut L2CFighterCommon) {
     if (is_excute) {
 		rust{
 		if CONFIG.instant_info.shulk{
-            MotionModule::set_rate(module_accessor, 11.0)
+            MotionModule::set_rate(module_accessor, 10.0)
             }
 		}
 	}
@@ -117,7 +117,7 @@ pub fn instant_shulk_fsmash(fighter: &mut L2CFighterCommon) {
     if (is_excute) {
 		rust{
 		if CONFIG.instant_info.shulk{
-            MotionModule::set_rate(module_accessor, 13.0)
+            MotionModule::set_rate(module_accessor, 12.0)
             }
 		}
 	}
@@ -148,6 +148,12 @@ pub fn instant_shulk_fsmash(fighter: &mut L2CFighterCommon) {
     if(is_excute){
         AttackModule::clear_all()
     }
+    frame(Frame=59)
+                if(is_excute){
+                    rust{
+                        StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+                    }
+                }
     });
 
 }
@@ -161,7 +167,7 @@ pub fn instant_shulk_fsmashhi(fighter: &mut L2CFighterCommon) {
     if (is_excute) {
 		rust{
 		if CONFIG.instant_info.shulk{
-            MotionModule::set_rate(module_accessor, 13.0)
+            MotionModule::set_rate(module_accessor, 12.0)
             }
 		}
 	}
@@ -192,6 +198,12 @@ pub fn instant_shulk_fsmashhi(fighter: &mut L2CFighterCommon) {
     if(is_excute){
         AttackModule::clear_all()
     }
+    frame(Frame=59)
+                if(is_excute){
+                    rust{
+                        StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+                    }
+                }
     });
 
 }
@@ -205,7 +217,7 @@ pub fn instant_shulk_fsmashlw(fighter: &mut L2CFighterCommon) {
     if (is_excute) {
 		rust{
 		if CONFIG.instant_info.shulk{
-            MotionModule::set_rate(module_accessor, 13.0)
+            MotionModule::set_rate(module_accessor, 12.0)
             }
 		}
 	}
@@ -236,6 +248,12 @@ pub fn instant_shulk_fsmashlw(fighter: &mut L2CFighterCommon) {
     if(is_excute){
         AttackModule::clear_all()
     }
+    frame(Frame=59)
+                if(is_excute){
+                    rust{
+                        StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_WAIT, true);
+                    }
+                }
     });
 
 }

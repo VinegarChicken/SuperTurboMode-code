@@ -174,7 +174,7 @@ animcmd = "game_attacks3")]
 pub fn instant_ganon_attack_s3s(fighter: &mut L2CFighterCommon) {
     acmd!({
 		if (is_excute) {
-			MotionModule::set_rate(10.0)
+			MotionModule::set_rate(9.0)
 		}
         frame(10)
 		if (is_excute) {
