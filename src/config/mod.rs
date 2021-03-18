@@ -22,7 +22,6 @@ pub struct Config {
     pub misc: Miscellaneous,
     pub version_info: VersionInfo,
     pub ganon_changes: GanondorfChanges,
-    pub roy_changes: RoyChanges,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
@@ -41,6 +40,9 @@ pub struct InstantInfo {
     pub charizard: bool,
     pub drmario: bool,
     pub ivysaur: bool,
+    pub wolf: bool,
+    pub peach: bool,
+    pub daisy: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -53,14 +55,6 @@ pub struct GanondorfChanges {
     pub rng_ganon_f_smash: bool,
     pub rng_ganon_u_smash_chances_upper: String,
     pub rng_ganon_f_smash_chances_upper: String,
-}
-#[derive(Debug, Default, Serialize, Deserialize)]
-pub struct RoyChanges {
-    pub giant_sword: bool,
-    pub giant_sword_scale_x: String,
-    pub giant_sword_scale_y: String,
-    pub giant_sword_scale_z: String,
-
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Miscellaneous {
@@ -90,6 +84,9 @@ impl Config {
                 charizard: true,
                 drmario: true,
                 ivysaur: true,
+                wolf: true,
+                peach: true,
+                daisy: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
@@ -103,12 +100,6 @@ impl Config {
                 rng_ganon_f_smash: true,
                 rng_ganon_u_smash_chances_upper: 5.to_string(),
                 rng_ganon_f_smash_chances_upper: 5.to_string(),
-            },
-            roy_changes: RoyChanges{
-                giant_sword: false,
-                giant_sword_scale_x: 5.to_string(),
-                giant_sword_scale_y: 5.to_string(),
-                giant_sword_scale_z: 5.to_string(),
             },
             version_info: VersionInfo {
                 version_num: env!("CARGO_PKG_VERSION").to_string(),

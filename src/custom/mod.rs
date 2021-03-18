@@ -30,15 +30,17 @@ pub fn once_per_fighter_frame(fighter : &mut L2CFighterCommon) {
         }
 
         //WorkModule::is_flag(module_accessor, *FIGHTER_CLOUD_INSTANCE_WORK_ID_FLAG_LIMIT_GAUGE_CHARGE);
+        /*
         if fighter_kind == *FIGHTER_KIND_ROY{
             if CONFIG.roy_changes.giant_sword{
                 let scale = smash::phx::Vector3f{x:CONFIG.roy_changes.giant_sword_scale_x.parse().unwrap(),y:CONFIG.roy_changes.giant_sword_scale_y.parse().unwrap(),z: CONFIG.roy_changes.giant_sword_scale_z.parse().unwrap()};
                 ModelModule::set_joint_scale(module_accessor, smash::phx::Hash40::new("sword1"), &scale);
             }
             //AttackModule::set_attack_scale(module_accessor, 5.0, true);
-
         }
-        println!("{}", StatusModule::status_kind(module_accessor));
+
+         */
+        //println!("{}", StatusModule::status_kind(module_accessor));
         if WorkModule::is_flag(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) && CONFIG.misc.infinite_airdodges{
             WorkModule::off_flag(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR)
         }
