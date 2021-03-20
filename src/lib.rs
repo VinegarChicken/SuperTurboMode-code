@@ -35,10 +35,15 @@ mod corrin;
 mod config;
 mod charizard;
 mod wolf;
+mod daisy;
+mod peach;
+mod byleth;
+mod incineroar;
 //mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
+    byleth::install();
     mario::install();
     falco::install();
     koopa::install();
@@ -65,5 +70,8 @@ pub fn main() {
     charizard::install();
     config::main();
     wolf::install();
+    daisy::install();
+    peach::install();
+    incineroar::install();
     //sephiroth::install();
 }
