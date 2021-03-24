@@ -45,6 +45,7 @@ pub struct InstantInfo {
     pub daisy: bool,
     pub incineroar: bool,
     pub byleth: bool,
+    pub lucas: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -91,6 +92,7 @@ impl Config {
                 daisy: true,
                 incineroar: true,
                 byleth: true,
+                lucas: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,

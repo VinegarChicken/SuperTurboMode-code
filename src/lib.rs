@@ -39,6 +39,7 @@ mod daisy;
 mod peach;
 mod byleth;
 mod incineroar;
+mod lucas;
 //mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]
@@ -73,5 +74,6 @@ pub fn main() {
     daisy::install();
     peach::install();
     incineroar::install();
+    lucas::install();
     //sephiroth::install();
 }
