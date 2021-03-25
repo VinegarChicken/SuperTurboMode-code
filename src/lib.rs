@@ -40,6 +40,7 @@ mod peach;
 mod byleth;
 mod incineroar;
 mod lucas;
+mod ridley;
 //mod sephiroth;
 
 #[skyline::main(name = "super_turbo_mode")]
@@ -75,5 +76,6 @@ pub fn main() {
     peach::install();
     incineroar::install();
     lucas::install();
+    ridley::install();
     //sephiroth::install();
 }
