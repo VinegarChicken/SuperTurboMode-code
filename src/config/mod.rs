@@ -22,6 +22,7 @@ pub struct Config {
     pub misc: Miscellaneous,
     pub version_info: VersionInfo,
     pub ganon_changes: GanondorfChanges,
+    pub banjo_changes: BanjoChanges,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
@@ -47,6 +48,7 @@ pub struct InstantInfo {
     pub byleth: bool,
     pub lucas: bool,
     pub ridley: bool,
+    pub banjo: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -60,6 +62,12 @@ pub struct GanondorfChanges {
     pub rng_ganon_u_smash_chances_upper: String,
     pub rng_ganon_f_smash_chances_upper: String,
 }
+
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct BanjoChanges {
+    pub fair_spike: bool,
+}
+
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct Miscellaneous {
     pub airdodge_cancels: bool,
@@ -95,6 +103,7 @@ impl Config {
                 byleth: true,
                 lucas: true,
                 ridley: true,
+                banjo: true
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
@@ -108,6 +117,9 @@ impl Config {
                 rng_ganon_f_smash: true,
                 rng_ganon_u_smash_chances_upper: 5.to_string(),
                 rng_ganon_f_smash_chances_upper: 5.to_string(),
+            },
+            banjo_changes: BanjoChanges{
+                fair_spike: true,
             },
             version_info: VersionInfo {
                 version_num: env!("CARGO_PKG_VERSION").to_string(),
