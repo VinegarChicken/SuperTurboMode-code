@@ -28,6 +28,7 @@ pub struct Config {
     pub lucas_changes: LucasChanges,
     //pub lucario_changes: LucarioChanges,
     pub beyonetta_changes: BayonettaChanges,
+    pub homerun_contest: HomerunContest,
 
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -62,6 +63,10 @@ pub struct InstantInfo {
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct VersionInfo {
     pub version_num: String,
+}
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct HomerunContest {
+    pub power_multiplier: String,
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct GanondorfChanges {
@@ -142,6 +147,9 @@ impl Config {
                 jab_cancels: true,
                 up_special_cancels: true,
                 aerial_smash_attacks: true,
+            },
+            homerun_contest: HomerunContest{
+                power_multiplier: "1.0".parse().unwrap(),
             },
             ganon_changes: GanondorfChanges{
                 rng_ganon_u_smash: true,
@@ -240,7 +248,7 @@ impl Config {
         Ok(())
     }
 }
-
+//I'll figure something else better later
 pub fn param_configs() -> std::io::Result<()>{
     if CONFIG.lucas_changes.giant_special_n{
         let lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/vl.prc");
