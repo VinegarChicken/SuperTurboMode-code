@@ -17,12 +17,18 @@ use std::io::{Seek, SeekFrom};
 use std::io::Error;
 use prc::ParamStruct;
 use skyline::nn::ro::LookupSymbol;
+use smash::app::sv_animcmd::PLAY_SE;
 
 pub static mut FIGHTER_MANAGER_ADDR: usize = 0;
+static mut entry_id : usize = 0;
 
 pub fn other_funny_stuff(fighter: &mut L2CFighterCommon){
     unsafe{
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
+        //let entry_id = WorkModule::get_int(module_accessor,*FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
+        let fighter_kind = smash::app::utility::get_kind(module_accessor);
+        let lua_state = fighter.lua_state_agent;
+
         LookupSymbol(
             &mut FIGHTER_MANAGER_ADDR,
             "_ZN3lib9SingletonIN3app14FighterManagerEE9instance_E\u{0}"
@@ -30,7 +36,7 @@ pub fn other_funny_stuff(fighter: &mut L2CFighterCommon){
                 .as_ptr(),);
         let fighter_manager = *(FIGHTER_MANAGER_ADDR as *mut *mut smash::app::FighterManager);
         if FighterManager::is_melee_mode_homerun(fighter_manager){
-            AttackModule::set_power_mul(module_accessor, 3.0);
+            AttackModule::set_power_mul(module_accessor, CONFIG.homerun_contest.power_multiplier.parse().unwrap());
         }
     }
 }
@@ -76,7 +82,7 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
         if special.contains(&curr_status){
             //CancelModule::enable_cancel(module_accessor);
         }
-        println!("{}", status_kind(module_accessor));
+        //println!("{}", status_kind(module_accessor));
         //Status kind 73 is hit by spike
         //Status kind 458 is dead
         if WorkModule::is_flag(module_accessor, *FIGHTER_INSTANCE_WORK_ID_FLAG_DISABLE_ESCAPE_AIR) && CONFIG.misc.infinite_airdodges{
