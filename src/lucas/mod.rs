@@ -5,6 +5,8 @@ use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use skyline::libc::*;
 use crate::config::CONFIG;
+use std::path::Path;
+use std::fs;
 
 #[acmd_func(
     battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER, 

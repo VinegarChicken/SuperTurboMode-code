@@ -2,13 +2,14 @@ use std::{fs, vec};
 use std::fs::File;
 use std::io::Write;
 use std::convert::From;
-
-
+use std::*;
 use skyline::error::show_error;
+
 
 use semver::Version;
 
 use serde::{Deserialize, Serialize};
+use std::path::Path;
 
 const CONFIG_FILE_PATH: &str = "sd:/atmosphere/contents/01006A800016E000/romfs/SuperTurboMode.toml";
 
@@ -23,6 +24,11 @@ pub struct Config {
     pub version_info: VersionInfo,
     pub ganon_changes: GanondorfChanges,
     pub banjo_changes: BanjoChanges,
+    pub fox_changes: FoxChanges,
+    pub lucas_changes: LucasChanges,
+    //pub lucario_changes: LucarioChanges,
+    pub beyonetta_changes: BayonettaChanges,
+
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
@@ -49,6 +55,8 @@ pub struct InstantInfo {
     pub lucas: bool,
     pub ridley: bool,
     pub banjo: bool,
+    pub littlemac: bool,
+    pub fox: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -64,8 +72,29 @@ pub struct GanondorfChanges {
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
+pub struct LucasChanges {
+    pub giant_special_n: bool,
+}
+
+#[derive(Debug, Default, Serialize, Deserialize)]
 pub struct BanjoChanges {
     pub fair_spike: bool,
+}
+
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct FoxChanges {
+    pub better_down_air: bool,
+    pub two_billion_percent_fair: bool,
+    pub shine_actual_spike: bool,
+}
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct LucarioChanges {
+    pub always_max_aura: bool,
+    pub overpowered_giant_aura_sphere: bool,
+}
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct BayonettaChanges {
+    pub super_long_witch_time: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -103,7 +132,9 @@ impl Config {
                 byleth: true,
                 lucas: true,
                 ridley: true,
-                banjo: true
+                banjo: true,
+                littlemac: true,
+                fox: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
@@ -120,6 +151,23 @@ impl Config {
             },
             banjo_changes: BanjoChanges{
                 fair_spike: true,
+            },
+            fox_changes: FoxChanges{
+                better_down_air: true,
+                two_billion_percent_fair: true,
+                shine_actual_spike: true,
+            },
+            lucas_changes: LucasChanges{
+                giant_special_n: false,
+            },
+            /*
+            lucario_changes: LucarioChanges{
+                always_max_aura: false,
+                overpowered_giant_aura_sphere: false,
+            },
+             */
+            beyonetta_changes: BayonettaChanges{
+                super_long_witch_time: false,
             },
             version_info: VersionInfo {
                 version_num: env!("CARGO_PKG_VERSION").to_string(),
@@ -192,6 +240,74 @@ impl Config {
         Ok(())
     }
 }
+
+pub fn param_configs() -> std::io::Result<()>{
+    if CONFIG.lucas_changes.giant_special_n{
+        let lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/vl.prc");
+        let disabled_lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/.vl.prc");
+        if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/.vl.prc")){
+            fs::rename(disabled_lucas_vl_param_path, lucas_vl_param_path);
+        }
+    }
+    else{
+        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/.vl.prc"));
+    }
+    if CONFIG.beyonetta_changes.super_long_witch_time{
+        let beyonetta_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/vl.prc");
+        let beyonetta_lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc");
+        if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc")){
+            fs::rename(beyonetta_lucas_vl_param_path, beyonetta_vl_param_path);
+        }
+    }
+    else{
+        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc"));
+    }
+/*
+    if CONFIG.lucario_changes.always_max_aura{
+        let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
+        let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
+        let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
+        if Path::exists(Path::new(lucario_vl_param)){
+            fs::rename(lucario_vl_param, lucario_always_aura_param_path);
+        }
+        else{
+            fs::rename(lucario_always_aura_param_path, lucario_vl_param);
+        }
+    }
+
+    if CONFIG.lucario_changes.overpowered_giant_aura_sphere{
+        let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
+        let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
+        let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
+        if Path::exists(Path::new(lucario_vl_param)){
+            fs::rename(lucario_vl_param, lucario_op_aura_ball_param_path);
+        }
+        else{
+            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
+        }
+    }
+    else{
+        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.vl.prc"));
+    }
+    if CONFIG.lucario_changes.overpowered_giant_aura_sphere && CONFIG.lucario_changes.always_max_aura{
+        let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
+        let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
+        let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
+        if Path::exists(Path::new(lucario_vl_param)){
+            fs::rename(lucario_vl_param, lucario_op_aura_ball_param_path);
+        }
+        else{
+            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
+        }
+    }
+    else{
+        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.vl.prc"));
+    }
+
+     */
+    Ok(())
+}
+
 pub fn main() -> Box<Config> {
     Config::open().unwrap()
 }
