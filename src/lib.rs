@@ -6,7 +6,12 @@
 use skyline::*;
 use std::ffi::CStr;
 use smash::resource::{LoadedTables, find_subsequence};
-use skyline::hooks::getRegionAddress;
+use skyline::hooks::{getRegionAddress, Region};
+use std::path::Path;
+use std::fs;
+use crate::config::CONFIG;
+
+
 
 mod mario;
 mod falco;
@@ -42,7 +47,10 @@ mod incineroar;
 mod lucas;
 mod ridley;
 mod banjo;
+mod mac;
+
 //mod sephiroth;
+
 
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
@@ -79,5 +87,7 @@ pub fn main() {
     lucas::install();
     ridley::install();
     banjo::install();
+    mac::install();
+    config::param_configs();
     //sephiroth::install();
 }
