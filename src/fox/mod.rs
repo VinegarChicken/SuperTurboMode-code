@@ -766,7 +766,7 @@ animcmd = "game_specialsstart")]
 pub fn special_s_start(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_execute){
-            MotionModule::set_frame(20.0, true)
+                MotionModule::set_frame(23.0, true)
         }
     });
 }
@@ -778,30 +778,11 @@ animcmd = "game_specialairsstart")]
 pub fn special_air_s_start(fighter: &mut L2CFighterCommon) {
     acmd!({
         if(is_execute){
-            MotionModule::set_frame(20.0, true)
+            MotionModule::set_frame(23.0, true)
         }
     });
 }
 pub fn install() {
-    /*
-    if CONFIG.fox_changes.better_down_air{
-        acmd::add_hooks!(
-        fox_dair,
-        );
-    }
-    if CONFIG.fox_changes.shine_actual_spike{
-        acmd::add_hooks!(
-        fox_shine_spike,
-        air_fox_shine_spike,
-        );
-    }
-    if CONFIG.fox_changes.two_billion_percent_fair{
-        acmd::add_hooks!(
-        fox_two_billion_fair,
-        );
-    }
-
-     */
     if CONFIG.instant_info.fox{
         acmd::add_hooks!(
         instant_fox_attack_11,
@@ -818,8 +799,8 @@ pub fn install() {
         instant_fox_attack_air_b,
         instant_fox_attack_air_hi,
         instant_fox_attack_air_lw,
-        instant_fox_shine,
-        air_instant_fox_shine,
+        //instant_fox_shine,
+        //air_instant_fox_shine,
         special_s_start,
         special_air_s_start,
        // instant_fox_special_s,
@@ -827,6 +808,22 @@ pub fn install() {
         //instant_fox_special_lw,
         //instant_fox_special_air_lw
     );
+    }
+    if CONFIG.fox_changes.better_down_air && !CONFIG.instant_info.fox{
+        acmd::add_hooks!(
+        fox_dair,
+        );
+    }
+    if CONFIG.fox_changes.shine_actual_spike && !CONFIG.instant_info.fox{
+        acmd::add_hooks!(
+        fox_shine_spike,
+        air_fox_shine_spike,
+        );
+    }
+    if CONFIG.fox_changes.two_billion_percent_fair && !CONFIG.instant_info.fox{
+        acmd::add_hooks!(
+        fox_two_billion_fair,
+        );
     }
     else{
         acmd::add_hooks!(
