@@ -29,6 +29,7 @@ pub struct Config {
     //pub lucario_changes: LucarioChanges,
     pub beyonetta_changes: BayonettaChanges,
     pub homerun_contest: HomerunContest,
+    //pub mac_changes: MacChanges,
 
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -58,6 +59,7 @@ pub struct InstantInfo {
     pub banjo: bool,
     pub littlemac: bool,
     pub fox: bool,
+    pub ken: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -75,7 +77,11 @@ pub struct GanondorfChanges {
     pub rng_ganon_u_smash_chances_upper: String,
     pub rng_ganon_f_smash_chances_upper: String,
 }
-
+#[derive(Debug, Default, Serialize, Deserialize)]
+pub struct MacChanges {
+    pub actual_down_air: bool,
+    pub actual_down_bair: bool,
+}
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct LucasChanges {
     pub giant_special_n: bool,
@@ -140,6 +146,7 @@ impl Config {
                 banjo: true,
                 littlemac: true,
                 fox: true,
+                ken: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
@@ -151,6 +158,10 @@ impl Config {
             homerun_contest: HomerunContest{
                 power_multiplier: "1.0".parse().unwrap(),
             },
+            //mac_changes: MacChanges{
+            //    actual_down_air: true,
+            //    actual_down_bair: true,
+            //},
             ganon_changes: GanondorfChanges{
                 rng_ganon_u_smash: true,
                 rng_ganon_f_smash: true,
@@ -249,7 +260,7 @@ impl Config {
     }
 }
 //I'll figure something else better later
-pub fn param_configs() -> std::io::Result<()>{
+pub fn other_configs() -> std::io::Result<()>{
     if CONFIG.lucas_changes.giant_special_n{
         let lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/vl.prc");
         let disabled_lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/.vl.prc");
@@ -262,14 +273,31 @@ pub fn param_configs() -> std::io::Result<()>{
     }
     if CONFIG.beyonetta_changes.super_long_witch_time{
         let beyonetta_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/vl.prc");
-        let beyonetta_lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc");
+        let beyonetta_disabled_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc");
         if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc")){
-            fs::rename(beyonetta_lucas_vl_param_path, beyonetta_vl_param_path);
+            fs::rename(beyonetta_disabled_vl_param_path, beyonetta_vl_param_path);
         }
     }
     else{
         fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc"));
     }
+    /*
+    if CONFIG.mac_changes.actual_down_air{
+            let mac_dair_anim = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
+            let mac_dair_anim_disabled = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
+            if Path::exists(Path::new(mac_dair_anim_disabled)){
+                fs::rename(mac_dair_anim_disabled, mac_dair_anim);
+            }
+    }
+    else{
+            let mac_dair_anim = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
+            let mac_dair_anim_disabled = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
+            if Path::exists(Path::new(mac_dair_anim)){
+                fs::rename(mac_dair_anim, mac_dair_anim_disabled);
+            }
+    }
+
+     */
 /*
     if CONFIG.lucario_changes.always_max_aura{
         let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
