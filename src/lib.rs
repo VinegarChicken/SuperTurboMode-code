@@ -48,6 +48,9 @@ mod lucas;
 mod ridley;
 mod banjo;
 mod mac;
+mod ken;
+mod terry;
+//mod terry;
 
 //mod sephiroth;
 
@@ -79,7 +82,6 @@ pub fn main() {
     roy::install();
     corrin::install();
     charizard::install();
-    config::main();
     wolf::install();
     daisy::install();
     peach::install();
@@ -88,6 +90,8 @@ pub fn main() {
     ridley::install();
     banjo::install();
     mac::install();
-    config::param_configs();
+    ken::install();
+    terry::install();
+    config::other_configs();
     //sephiroth::install();
 }
