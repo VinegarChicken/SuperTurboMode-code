@@ -783,6 +783,106 @@ pub fn instant_ken_special_lw(fighter: &mut L2CFighterCommon) {
 
 }
 
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_KEN,
+animation = "special_air_lw",
+animcmd = "game_specialairlw")]
+pub fn instant_ken_special_air_lw(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(11.0, true)
+    }
+    frame(Frame=12)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_LW_FLAG_DISABLE_SUPER_ARMOR)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=17.0, Angle=45, KBG=100, FKB=0, BKB=0, Size=5.4, X=0.0, Y=9.5, Z=13.0, X2=0.0, Y2=9.5, Z2=3.9, Hitlag=2.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x192a2f9ba6 as u64, SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KEN_KICK, Type=ATTACK_REGION_PUNCH)
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=17.0, Angle=45, KBG=100, FKB=0, BKB=0, Size=5.4, X=0.0, Y=9.5, Z=13.0, X2=0.0, Y2=9.5, Z2=3.9, Hitlag=2.3, SDI=1.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=hash40("no"), Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=0x192a2f9ba6 as u64, SFXLevel=ATTACK_SOUND_LEVEL_L, SFXType=COLLISION_SOUND_ATTR_KEN_KICK, Type=ATTACK_REGION_PUNCH)
+        AttackModule::set_attack_level(0, *FIGHTER_RYU_SAVING_LV_3 as u8)
+        AttackModule::set_attack_level(1, *FIGHTER_RYU_SAVING_LV_3 as u8)
+        AttackModule::set_no_finish_camera(0, true, false)
+        AttackModule::set_no_finish_camera(1, true, false)
+        }
+    frame(Frame=14)
+    if(is_excute){
+        AttackModule::clear_all()
+    }
+    frame(Frame=16)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_LW_FLAG_REVERSE_MATERIAL_ANIM)
+    }
+    });
+
+}
+
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_KEN,
+animation = "special_n",
+animcmd = "game_specialn")]
+pub fn instant_ken_special_n(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(12.0, true)
+    }
+    frame(Frame=10)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    frame(Frame=13)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SHOOT)
+    }
+    frame(Frame=14)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+    }
+    frame(Frame=22)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+    }
+    frame(Frame=28)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    });
+
+}
+
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_KEN,
+animation = "special_air_n",
+animcmd = "game_specialairn")]
+pub fn instant_ken_special_air_n(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(12.0, true)
+    }
+    frame(Frame=10)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    frame(Frame=13)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SHOOT)
+    }
+    frame(Frame=14)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+    }
+    frame(Frame=22)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_RYU_INSTANCE_WORK_ID_FLAG_FINAL_HIT_CANCEL)
+    }
+    frame(Frame=28)
+    if(is_excute){
+        WorkModule::off_flag(Flag=FIGHTER_RYU_STATUS_WORK_ID_SPECIAL_N_FLAG_SPECIAL_FALL)
+    }
+    });
+
+}
+
 pub fn install() {
     if CONFIG.instant_info.ken{
         acmd::add_hooks!(
@@ -805,7 +905,10 @@ pub fn install() {
         instant_ken_attack_air_b,
         instant_ken_attack_air_hi,
         instant_ken_attack_air_lw,
-        instant_ken_special_lw
+        instant_ken_special_lw,
+        instant_ken_special_air_lw,
+        instant_ken_special_n,
+        instant_ken_special_air_n
        // instant_ken_special_s_start,
         //instant_ken_special_s_dash,
        // instant_ken_special_air_s_start,
