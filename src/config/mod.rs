@@ -26,11 +26,10 @@ pub struct Config {
     pub banjo_changes: BanjoChanges,
     pub fox_changes: FoxChanges,
     pub lucas_changes: LucasChanges,
-    //pub lucario_changes: LucarioChanges,
     pub beyonetta_changes: BayonettaChanges,
     pub homerun_contest: HomerunContest,
-    //pub mac_changes: MacChanges,
-
+    pub mac_changes: MacChanges,
+    pub lucario_changes: LucarioChanges
 }
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct InstantInfo {
@@ -158,10 +157,10 @@ impl Config {
             homerun_contest: HomerunContest{
                 power_multiplier: "1.0".parse().unwrap(),
             },
-            //mac_changes: MacChanges{
-            //    actual_down_air: true,
-            //    actual_down_bair: true,
-            //},
+            mac_changes: MacChanges{
+                actual_down_air: true,
+               actual_down_bair: true,
+            },
             ganon_changes: GanondorfChanges{
                 rng_ganon_u_smash: true,
                 rng_ganon_f_smash: true,
@@ -179,12 +178,10 @@ impl Config {
             lucas_changes: LucasChanges{
                 giant_special_n: false,
             },
-            /*
             lucario_changes: LucarioChanges{
                 always_max_aura: false,
                 overpowered_giant_aura_sphere: false,
             },
-             */
             beyonetta_changes: BayonettaChanges{
                 super_long_witch_time: false,
             },
@@ -259,7 +256,7 @@ impl Config {
         Ok(())
     }
 }
-//I'll figure something else better later
+
 pub fn other_configs() -> std::io::Result<()>{
     if CONFIG.lucas_changes.giant_special_n{
         let lucas_vl_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucas/param/vl.prc");
@@ -281,69 +278,59 @@ pub fn other_configs() -> std::io::Result<()>{
     else{
         fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/bayonetta/param/.vl.prc"));
     }
-    /*
-    if CONFIG.mac_changes.actual_down_air{
-            let mac_dair_anim = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
-            let mac_dair_anim_disabled = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
-            if Path::exists(Path::new(mac_dair_anim_disabled)){
-                fs::rename(mac_dair_anim_disabled, mac_dair_anim);
-            }
+    if CONFIG.lucario_changes.overpowered_giant_aura_sphere{
+        let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
+        let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
+        let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
+        let lucario_disabled_giant_aura_sphere = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.GiantAuraSphere.prc");
+        if Path::exists(lucario_vl_param){
+            fs::rename(lucario_vl_param, lucario_always_aura_param_path);
+            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
+        }
+        else{
+            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
+        }
     }
     else{
-            let mac_dair_anim = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
-            let mac_dair_anim_disabled = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/littlemac/motion/body/c00/c05attackairlw.nuanmb");
-            if Path::exists(Path::new(mac_dair_anim)){
-                fs::rename(mac_dair_anim, mac_dair_anim_disabled);
-            }
+        if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc")){
+            fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc"));
+        }
     }
-
-     */
-/*
     if CONFIG.lucario_changes.always_max_aura{
         let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
         let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
         let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
+        let lucario_disabled_always_max_aura = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.AlwaysMaxAura.prc");
         if Path::exists(Path::new(lucario_vl_param)){
-            fs::rename(lucario_vl_param, lucario_always_aura_param_path);
+            fs::rename(lucario_vl_param, lucario_op_aura_ball_param_path);
+            fs::rename(lucario_always_aura_param_path, lucario_vl_param);
         }
         else{
             fs::rename(lucario_always_aura_param_path, lucario_vl_param);
         }
     }
-
-    if CONFIG.lucario_changes.overpowered_giant_aura_sphere{
-        let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
-        let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
-        let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
-        if Path::exists(Path::new(lucario_vl_param)){
-            fs::rename(lucario_vl_param, lucario_op_aura_ball_param_path);
-        }
-        else{
-            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
-        }
-    }
     else{
-        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.vl.prc"));
+        if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc")){
+            fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc"));
+        }
     }
     if CONFIG.lucario_changes.overpowered_giant_aura_sphere && CONFIG.lucario_changes.always_max_aura{
         let lucario_always_aura_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/AlwaysMaxAura.prc");
         let lucario_op_aura_ball_param_path = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc");
         let lucario_vl_param = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc");
-        if Path::exists(Path::new(lucario_vl_param)){
-            fs::rename(lucario_vl_param, lucario_op_aura_ball_param_path);
+        let lucario_disabled_giant_aura_sphere = Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.GiantAuraSphere.prc");
+        if Path::exists(lucario_vl_param){
+            fs::rename(lucario_vl_param, lucario_always_aura_param_path);
+            fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
         }
         else{
             fs::rename(lucario_op_aura_ball_param_path, lucario_vl_param);
         }
     }
     else{
-        fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/.vl.prc"));
+        if Path::exists(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc")){
+            fs::rename(Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/vl.prc"), Path::new("sd:/Ultimate/mods/SuperTurboMode-base/fighter/lucario/param/GiantAuraSphere.prc"));
+        }
     }
-
-     */
     Ok(())
-}
-
-pub fn main() -> Box<Config> {
-    Config::open().unwrap()
 }
