@@ -523,31 +523,6 @@ pub fn instant_zard_attack_s3hi(fighter: &mut L2CFighterCommon) {
 
 }
 
-#[acmd_func(
-battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
-battle_object_kind = FIGHTER_KIND_PLIZARDON,
-animation = "special_s_start",
-animcmd = "game_specialsstart")]
-pub fn charizard_instant_special_s_start(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        if(is_execute){
-             MotionModule::set_rate(22.0)
-        }
-    });
-}
-#[acmd_func(
-battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
-battle_object_kind = FIGHTER_KIND_PLIZARDON,
-animation = "special_air_s_start",
-animcmd = "game_specialairsstart")]
-pub fn charizard_instant_special_air_s_start(fighter: &mut L2CFighterCommon) {
-    acmd!({
-        if(is_execute){
-            MotionModule::set_rate(22.0)
-        }
-    });
-}
-
 pub fn install() {
     acmd::add_hooks!(
     instant_charizard_attack_11,
@@ -561,8 +536,6 @@ pub fn install() {
     charizard_f_smash,
     //charizard_u_smash,
     charizard_d_smash,
-    charizard_instant_special_s_start,
-    charizard_instant_special_air_s_start,
     instant_zard_attack_s3s,
     instant_zard_attack_s3hi,
     instant_zard_attack_s3lw
