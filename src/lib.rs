@@ -50,6 +50,8 @@ mod banjo;
 mod mac;
 mod ken;
 mod terry;
+mod darkpit;
+mod pit;
 //mod terry;
 
 //mod sephiroth;
@@ -93,5 +95,7 @@ pub fn main() {
     ken::install();
     terry::install();
     config::other_configs();
+    darkpit::install();
+    pit::install();
     //sephiroth::install();
 }

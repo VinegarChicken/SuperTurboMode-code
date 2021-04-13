@@ -59,6 +59,8 @@ pub struct InstantInfo {
     pub littlemac: bool,
     pub fox: bool,
     pub ken: bool,
+    pub darkpit: bool,
+    pub pit: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -146,6 +148,8 @@ impl Config {
                 littlemac: true,
                 fox: true,
                 ken: true,
+                darkpit: true,
+                pit: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
