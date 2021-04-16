@@ -16,18 +16,24 @@ use std::fs;
 use std::io::{Seek, SeekFrom};
 use std::io::Error;
 use skyline::nn::ro::LookupSymbol;
+use smash::cpp::root::app::lua_bind::AttackModule::attack_data;
+use smash::cpp::root::app::Fighter_is_absolutely_final_status;
 use smash::app::sv_animcmd::PLAY_SE;
-use http::request::*;
+use std::time::Duration;
+use skyline::nn::os::StartThread;
 
 pub static mut FIGHTER_MANAGER_ADDR: usize = 0;
 static mut entry_id : usize = 0;
 
-pub fn other_funny_stuff(fighter: &mut L2CFighterCommon){
+
+
+pub fn other_stuff(fighter: &mut L2CFighterCommon){
     unsafe{
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         entry_id = WorkModule::get_int(module_accessor,*FIGHTER_INSTANCE_WORK_ID_INT_ENTRY_ID) as usize;
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
         let lua_state = fighter.lua_state_agent;
+        let status = StatusModule::status_kind(module_accessor);
         LookupSymbol(
             &mut FIGHTER_MANAGER_ADDR,
             "_ZN3lib9SingletonIN3app14FighterManagerEE9instance_E\u{0}"
@@ -37,12 +43,21 @@ pub fn other_funny_stuff(fighter: &mut L2CFighterCommon){
         if FighterManager::is_melee_mode_homerun(fighter_manager){
             AttackModule::set_power_mul(module_accessor, CONFIG.homerun_contest.power_multiplier.parse().unwrap());
         }
+        if FighterManager::is_result_mode(fighter_manager){
+            //MotionModule::set_rate(module_accessor, 30.0);
+        }
+        if fighter_kind == *FIGHTER_KIND_BRAVE && [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK1, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK2, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_HOLD].contains(&status){
+            StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK3, true);
+        }
+        /*
         if ControlModule::get_stick_y(module_accessor) == -1.0{
             FighterManager::set_position_lock(fighter_manager, smash::app::FighterEntryID(entry_id as i32), true);
         }
         else{
             FighterManager::set_position_lock(fighter_manager, smash::app::FighterEntryID(entry_id as i32), false);
         }
+
+         */
     }
 }
 
@@ -87,7 +102,7 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
             PARAMETER CONFIG STUFF
          ***********************************************************************************************************************************************************************************************************/
         if special.contains(&curr_status){
-            CancelModule::enable_cancel(module_accessor);
+            //CancelModule::enable_cancel(module_accessor);
         }
         //println!("{}", status_kind(module_accessor));
         //Status kind 73 is hit by spike
@@ -142,6 +157,6 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
 
 pub fn install() {
     acmd::add_custom_hooks!(config_implementations);
-    acmd::add_custom_hooks!(other_funny_stuff);
+    acmd::add_custom_hooks!(other_stuff);
 
 }
