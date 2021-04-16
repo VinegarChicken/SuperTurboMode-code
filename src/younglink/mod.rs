@@ -587,7 +587,7 @@ pub fn instant_ylink_special_air_s1(fighter: &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    //if CONFIG.instant_info.banjo{
+    if CONFIG.instant_info.younglink{
         acmd::add_hooks!(
         instant_ylink_attack_11,
         instant_ylink_attack_12,
@@ -611,6 +611,6 @@ pub fn install() {
         //instant_ylink_special_lw,
         //instant_ylink_special_air_lw
     );
-    //}
+    }
 
 }

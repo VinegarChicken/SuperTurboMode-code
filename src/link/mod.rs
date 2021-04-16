@@ -619,7 +619,7 @@ pub fn instant_link_special_air_s1(fighter: &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    //if CONFIG.instant_info.banjo{
+    if CONFIG.instant_info.link{
         acmd::add_hooks!(
         instant_link_attack_11,
         instant_link_attack_12,
@@ -643,6 +643,6 @@ pub fn install() {
         //instant_link_special_lw,
         //instant_link_special_air_lw
     );
-    //}
+    }
 
 }

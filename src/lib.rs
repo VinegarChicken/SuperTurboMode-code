@@ -52,6 +52,11 @@ mod ken;
 mod terry;
 mod darkpit;
 mod pit;
+mod link;
+mod younglink;
+mod hero;
+mod joker;
+mod wario;
 //mod terry;
 
 //mod sephiroth;
@@ -97,5 +102,10 @@ pub fn main() {
     config::other_configs();
     darkpit::install();
     pit::install();
+    link::install();
+    younglink::install();
+    hero::install();
+    joker::install();
+    wario::install();
     //sephiroth::install();
 }

@@ -570,7 +570,7 @@ pub fn instant_hero_attack_air_lw(fighter: &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    //if CONFIG.instant_info.banjo{
+    if CONFIG.instant_info.hero{
         acmd::add_hooks!(
         instant_hero_attack_11,
         instant_hero_attack_12,
@@ -592,6 +592,6 @@ pub fn install() {
         //instant_hero_special_lw,
         //instant_hero_special_air_lw
     );
-    //}
+    }
 
 }
