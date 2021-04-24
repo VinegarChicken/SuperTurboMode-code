@@ -267,7 +267,7 @@ pub fn instant_fox_attack_hi4(fighter: &mut L2CFighterCommon) {
     }
     wait(Frames=1)
     if(is_excute){
-        AttackModule::clear(ID=2, false)
+        //AttackModule::clear(ID=2, false)
     }
     wait(Frames=1)
     if(is_excute){
@@ -801,8 +801,8 @@ pub fn install() {
         instant_fox_attack_air_lw,
         //instant_fox_shine,
         //air_instant_fox_shine,
-        special_s_start,
-        special_air_s_start,
+        //special_s_start,
+        //special_air_s_start,
        // instant_fox_special_s,
        // instant_fox_special_air_s,
         //instant_fox_special_lw,

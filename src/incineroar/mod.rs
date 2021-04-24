@@ -963,6 +963,119 @@ pub fn instant_incineroar_special_air_n(fighter: &mut L2CFighterCommon) {
     }
     });
 }
+
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_GAOGAEN,
+animation = "special_s_start",
+animcmd = "game_specialsstart")]
+pub fn incineroar_instant_special_s_start(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(16.0, true)
+    }
+    frame(Frame=1)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_FLAG_MOVE_START)
+    }
+    FT_MOTION_RATE(FSM=0.8)
+    frame(Frame=11)
+    FT_MOTION_RATE(FSM=1)
+    frame(Frame=15)
+    if(is_excute){
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.0, Angle=350, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.0, Z=2.0, X2=0.0, Y2=7.0, Z2=5.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA_d, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=16)
+    if(is_excute){
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=0.0, Angle=350, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.0, Z=2.0, X2=0.0, Y2=7.0, Z2=5.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA_d, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=17)
+    if(is_excute){
+        GrabModule::set_rebound(CanCatchRebound=true)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        AttackModule::clear_all()
+        CATCH(ID=0, Bone=hash40("top"), Size=4.0, X=0.0, Y=8.0, Z=2.0, X2=0.0, Y2=8.0, Z2=8.0, Status=FIGHTER_STATUS_KIND_SWING_GAOGAEN_CATCHED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+        CATCH(ID=1, Bone=hash40("top"), Size=1.5, X=0.0, Y=8.0, Z=2.0, X2=0.0, Y2=8.0, Z2=10.5, Status=FIGHTER_STATUS_KIND_SWING_GAOGAEN_CATCHED, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+    }
+    frame(Frame=35)
+    if(is_excute){
+        sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+        GrabModule::set_rebound(CanCatchRebound=false)
+    }
+    frame(Frame=39)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_FLAG_MOVE_END)
+    }
+    frame(Frame=44)
+    FT_MOTION_RATE(FSM=0.8)
+    frame(Frame=67)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_WORK_ID_FLAG_AIR_CONTROL)
+    }
+    frame(Frame=74)
+    FT_MOTION_RATE(FSM=1)
+    });
+
+}
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_GAOGAEN,
+animation = "special_air_s_start",
+animcmd = "game_specialairsstart")]
+pub fn incineroar_instant_special_air_s_start(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(16.0, true)
+    }
+    frame(Frame=1)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_FLAG_MOVE_START)
+    }
+    FT_MOTION_RATE(FSM=0.8)
+    frame(Frame=11)
+    FT_MOTION_RATE(FSM=1)
+    frame(Frame=15)
+    if(is_excute){
+        sv_battle_object::notify_event_msc_cmd(0x2127e37c07, GROUND_CLIFF_CHECK_KIND_ALWAYS_BOTH_SIDES)
+        ATTACK(ID=0, Part=0, Bone=hash40("top"), Damage=0.0, Angle=350, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.0, Z=2.0, X2=0.0, Y2=7.0, Z2=5.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA_d, Hitbits=COLLISION_CATEGORY_MASK_FIGHTER, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=16)
+    if(is_excute){
+        ATTACK(ID=1, Part=0, Bone=hash40("top"), Damage=0.0, Angle=350, KBG=100, FKB=30, BKB=0, Size=5.0, X=0.0, Y=7.0, Z=2.0, X2=0.0, Y2=7.0, Z2=5.0, Hitlag=0.0, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_OFF, FacingRestrict=ATTACK_LR_CHECK_F, SetWeight=false, ShieldDamage=0, Trip=0.0, Rehit=0, Reflectable=false, Absorbable=false, Flinchless=true, DisableHitlag=true, Direct_Hitbox=false, Ground_or_Air=COLLISION_SITUATION_MASK_GA_d, Hitbits=COLLISION_CATEGORY_MASK_FEB, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_normal"), SFXLevel=ATTACK_SOUND_LEVEL_S, SFXType=COLLISION_SOUND_ATTR_NONE, Type=ATTACK_REGION_NONE)
+    }
+    frame(Frame=17)
+    if(is_excute){
+        GrabModule::set_rebound(CanCatchRebound=true)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        AttackModule::clear_all()
+        CATCH(ID=0, Bone=hash40("top"), Size=4.0, X=0.0, Y=8.0, Z=2.0, X2=0.0, Y2=8.0, Z2=8.0, Status=FIGHTER_STATUS_KIND_SWING_GAOGAEN_CATCHED, Ground_or_Air=COLLISION_SITUATION_MASK_G)
+        CATCH(ID=1, Bone=hash40("top"), Size=2.5, X=0.0, Y=8.0, Z=2.0, X2=0.0, Y2=8.0, Z2=9.5, Status=FIGHTER_STATUS_KIND_SWING_GAOGAEN_CATCHED, Ground_or_Air=COLLISION_SITUATION_MASK_GA)
+    }
+    frame(Frame=35)
+    if(is_excute){
+        sv_module_access::grab(MA_MSC_CMD_GRAB_CLEAR_ALL)
+        GrabModule::set_rebound(CanCatchRebound=false)
+    }
+    frame(Frame=39)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_FLAG_MOVE_END)
+    }
+    frame(Frame=44)
+    FT_MOTION_RATE(FSM=0.8)
+    frame(Frame=67)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_GAOGAEN_STATUS_SPECIAL_S_WORK_ID_FLAG_AIR_CONTROL)
+    }
+    frame(Frame=74)
+    FT_MOTION_RATE(FSM=1)
+    });
+
+}
+
 pub fn install() {
     if CONFIG.instant_info.incineroar{
     acmd::add_hooks!(
@@ -984,6 +1097,8 @@ pub fn install() {
 		instant_incineroar_attack_air_lw,
 		instant_incineroar_special_n,
 		instant_incineroar_special_air_n,
+		incineroar_instant_special_air_s_start,
+		incineroar_instant_special_s_start,
 		//effect_attack_lw3
     );
     }

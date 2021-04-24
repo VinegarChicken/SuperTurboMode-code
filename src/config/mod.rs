@@ -61,11 +61,6 @@ pub struct InstantInfo {
     pub ken: bool,
     pub darkpit: bool,
     pub pit: bool,
-    pub joker: bool,
-    pub wario: bool,
-    pub link: bool,
-    pub younglink: bool,
-    pub hero: bool,
 }
 
 #[derive(Debug, Default, Serialize, Deserialize)]
@@ -155,11 +150,6 @@ impl Config {
                 ken: true,
                 darkpit: true,
                 pit: true,
-                joker: true,
-                wario: true,
-                link: true,
-                younglink: true,
-                hero: true,
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,

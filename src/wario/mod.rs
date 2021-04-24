@@ -471,7 +471,7 @@ pub fn instant_wario_attack_air_lw(fighter: &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    if CONFIG.instant_info.wario{
+    //if CONFIG.instant_info.banjo{
         acmd::add_hooks!(
         instant_wario_attack_11,
         instant_wario_attack_12,
@@ -493,6 +493,6 @@ pub fn install() {
         //instant_wario_special_lw,
         //instant_wario_special_air_lw
     );
-    }
+    //}
 
 }

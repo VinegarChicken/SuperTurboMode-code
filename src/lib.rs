@@ -4,9 +4,6 @@
 
 
 use skyline::*;
-use std::ffi::CStr;
-use smash::resource::{LoadedTables, find_subsequence};
-use skyline::hooks::{getRegionAddress, Region};
 use std::path::Path;
 use std::fs;
 use crate::config::CONFIG;
@@ -57,6 +54,11 @@ mod younglink;
 mod hero;
 mod joker;
 mod wario;
+mod luigi;
+mod mewtwo;
+mod snake;
+mod palutena;
+//mod palutena;
 //mod terry;
 
 //mod sephiroth;
@@ -64,6 +66,7 @@ mod wario;
 
 #[skyline::main(name = "super_turbo_mode")]
 pub fn main() {
+    //config::other_configs();
     byleth::install();
     mario::install();
     falco::install();
@@ -99,7 +102,6 @@ pub fn main() {
     mac::install();
     ken::install();
     terry::install();
-    config::other_configs();
     darkpit::install();
     pit::install();
     link::install();
@@ -107,5 +109,10 @@ pub fn main() {
     hero::install();
     joker::install();
     wario::install();
+    luigi::install();
+    mewtwo::install();
+    snake::install();
+    mewtwo::install();
+    //palutena::install();
     //sephiroth::install();
 }

@@ -21,6 +21,8 @@ use smash::cpp::root::app::Fighter_is_absolutely_final_status;
 use smash::app::sv_animcmd::PLAY_SE;
 use std::time::Duration;
 use skyline::nn::os::StartThread;
+use smash::cpp::root::app::lua_bind::ColorBlendModule::set_main_color;
+use skyline::nn::fs::CanMountRom;
 
 pub static mut FIGHTER_MANAGER_ADDR: usize = 0;
 static mut entry_id : usize = 0;
@@ -34,6 +36,7 @@ pub fn other_stuff(fighter: &mut L2CFighterCommon){
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
         let lua_state = fighter.lua_state_agent;
         let status = StatusModule::status_kind(module_accessor);
+        let motion_kind = MotionModule::motion_kind(module_accessor);
         LookupSymbol(
             &mut FIGHTER_MANAGER_ADDR,
             "_ZN3lib9SingletonIN3app14FighterManagerEE9instance_E\u{0}"
@@ -49,15 +52,41 @@ pub fn other_stuff(fighter: &mut L2CFighterCommon){
         if fighter_kind == *FIGHTER_KIND_BRAVE && [*FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK1, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK2, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_HOLD].contains(&status){
             StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_BRAVE_STATUS_KIND_SPECIAL_S_ATTACK3, true);
         }
-        /*
-        if ControlModule::get_stick_y(module_accessor) == -1.0{
-            FighterManager::set_position_lock(fighter_manager, smash::app::FighterEntryID(entry_id as i32), true);
+        if fighter_kind == *FIGHTER_KIND_MEWTWO && status == *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_HOLD{
+            StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_N_SHOOT, true);
         }
-        else{
-            FighterManager::set_position_lock(fighter_manager, smash::app::FighterEntryID(entry_id as i32), false);
+        if fighter_kind == *FIGHTER_KIND_FALCO{
+            if motion_kind == smash::hash40("special_s_start"){
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
+            if motion_kind == smash::hash40("special_air_s_start"){
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
         }
-
-         */
+        if fighter_kind == *FIGHTER_KIND_FOX{
+            if motion_kind == smash::hash40("special_s_start"){
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
+            if motion_kind == smash::hash40("special_air_s_start"){
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
+        }
+        if fighter_kind == *FIGHTER_KIND_PLIZARDON{
+            if motion_kind == smash::hash40("special_s_start"){
+                CancelModule::enable_cancel(module_accessor);
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
+            if motion_kind == smash::hash40("special_s") || motion_kind == smash::hash40("special_s_blown"){
+                CancelModule::enable_cancel(module_accessor);
+            }
+            if motion_kind == smash::hash40("special_air_s") || motion_kind == smash::hash40("special_air_s_blown"){
+                CancelModule::enable_cancel(module_accessor);
+            }
+            if motion_kind == smash::hash40("special_air_s_start"){
+                CancelModule::enable_cancel(module_accessor);
+                MotionModule::set_rate(module_accessor, 23.0);
+            }
+        }
     }
 }
 
@@ -128,15 +157,21 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
             }
         }
+        if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_CATCH){
+            StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_CATCH, true);
+            if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_CATCH{
+                StatusModule::set_situation_kind(module_accessor, SituationKind(*SITUATION_KIND_GROUND), true)
+            }
+        }
         if CONFIG.misc.aerial_smash_attacks && !no_aerial_smash_status.contains(&curr_status){
             //CancelModule::enable_cancel(module_accessor);
-            if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R){
+            if !ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R){
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4, true);
             }
-            if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI){
+            if !ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_HI){
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_HI4, true);
             }
-            if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW){
+            if !ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_LW){
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_LW4, true);
             }
             if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_ATTACK_S4{
