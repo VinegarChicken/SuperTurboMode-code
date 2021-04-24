@@ -14,7 +14,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 skyline = { git = "https://github.com/ultimate-research/skyline-rs.git" }
-skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash"}
+skyline_smash = { git = "https://github.com/ultimate-research/skyline-smash", features = ["weak_l2cvalue"] }
 acmd = { git = "https://github.com/ultimate-research/skyline-acmd.git" }
 toml = "0.5.6"
 lazy_static = "1.4"

@@ -113,6 +113,6 @@ pub fn main() {
     mewtwo::install();
     snake::install();
     mewtwo::install();
-    //palutena::install();
+    palutena::install();
     //sephiroth::install();
 }
