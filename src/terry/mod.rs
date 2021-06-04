@@ -586,6 +586,7 @@ pub fn instant_dolly_attack_air_lw(fighter: &mut L2CFighterCommon) {
 }
 
 pub fn install() {
+    if CONFIG.instant_info.terry{
         acmd::add_hooks!(
 		instant_dolly_attack_11,
 		instant_dolly_attack_12,
@@ -602,4 +603,6 @@ pub fn install() {
 		instant_dolly_attack_air_hi,
 		instant_dolly_attack_air_lw,
     );
+    }
+
 }

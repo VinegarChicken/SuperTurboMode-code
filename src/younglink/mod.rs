@@ -585,9 +585,46 @@ pub fn instant_ylink_special_air_s1(fighter: &mut L2CFighterCommon) {
 
 }
 
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_YOUNGLINK,
+animation = "special_n_start",
+animcmd = "game_specialnstart")]
+pub fn instant_ylink_special_n_start(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(17.0, true)
+        ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_BOW, false, 0)
+        ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_BOWARROW, false, 0)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_LINK_STATUS_BOW_FLAG_CHARGE)
+    }
+    });
+}
 
+#[acmd_func(
+battle_object_category = BATTLE_OBJECT_CATEGORY_FIGHTER,
+battle_object_kind = FIGHTER_KIND_YOUNGLINK,
+animation = "special_air_n_start",
+animcmd = "game_specialairnstart")]
+pub fn instant_ylink_special_air_n_start(fighter: &mut L2CFighterCommon) {
+    acmd!({
+    if(is_execute){
+        MotionModule::set_frame(17.0, true)
+        ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_BOW, false, 0)
+        ArticleModule::generate_article(FIGHTER_YOUNGLINK_GENERATE_ARTICLE_BOWARROW, false, 0)
+    }
+    frame(Frame=18)
+    if(is_excute){
+        WorkModule::on_flag(Flag=FIGHTER_LINK_STATUS_BOW_FLAG_CHARGE)
+    }
+    });
+
+}
 pub fn install() {
-    //if CONFIG.instant_info.banjo{
+    if CONFIG.instant_info.younglink{
         acmd::add_hooks!(
         instant_ylink_attack_11,
         instant_ylink_attack_12,
@@ -605,12 +642,14 @@ pub fn install() {
         instant_ylink_attack_air_hi,
         instant_ylink_attack_air_lw,
         instant_ylink_special_s1,
-        instant_ylink_special_air_s1
+        instant_ylink_special_air_s1,
+        instant_ylink_special_n_start,
+        instant_ylink_special_air_n_start
        // instant_ylink_special_s,
        // instant_ylink_special_air_s,
         //instant_ylink_special_lw,
         //instant_ylink_special_air_lw
     );
-    //}
+    }
 
 }

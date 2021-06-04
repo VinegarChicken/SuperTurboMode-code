@@ -4,6 +4,7 @@ use smash::app::lua_bind::*;
 use smash::lua2cpp::L2CFighterCommon;
 use acmd::{acmd, acmd_func};
 use skyline::libc::*;
+use smash::app::ArticleOperationTarget;
 use crate::config::CONFIG;
 
 #[acmd_func(
@@ -284,7 +285,7 @@ pub fn instant_palutena_attack_s4_s(fighter: &mut L2CFighterCommon) {
     }
     frame(Frame=80)
     if(is_excute){
-        ArticleModule::remove_exist(FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING)
+        ArticleModule::remove_exist(FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
     }
     });
 
@@ -370,7 +371,7 @@ pub fn instant_palutena_attack_lw4(fighter: &mut L2CFighterCommon) {
     }
     frame(Frame=80)
     if(is_excute){
-        ArticleModule::remove_exist(FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING)
+        ArticleModule::remove_exist(FIGHTER_PALUTENA_GENERATE_ARTICLE_GODWING, ArticleOperationTarget(*ARTICLE_OPE_TARGET_ALL))
     }
     });
 
@@ -408,8 +409,8 @@ pub fn instant_palutena_attack_air_n(fighter: &mut L2CFighterCommon) {
         ATTACK(ID=1, Part=0, Bone=hash40("stick"), Damage=1.4, Angle=367, KBG=100, FKB=65, BKB=0, Size=4.2, X=0.0, Y=-5.4, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.0, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_A, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
         ATTACK(ID=2, Part=0, Bone=hash40("stick"), Damage=1.4, Angle=100, KBG=100, FKB=65, BKB=0, Size=4.2, X=0.0, Y=5.2, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
         ATTACK(ID=3, Part=0, Bone=hash40("stick"), Damage=1.4, Angle=100, KBG=100, FKB=65, BKB=0, Size=4.2, X=0.0, Y=-5.4, Z=0.0, X2=LUA_VOID, Y2=LUA_VOID, Z2=LUA_VOID, Hitlag=0.5, SDI=0.3, Clang_Rebound=ATTACK_SETOFF_KIND_THRU, FacingRestrict=ATTACK_LR_CHECK_POS, SetWeight=false, ShieldDamage=1, Trip=0.0, Rehit=4, Reflectable=false, Absorbable=false, Flinchless=false, DisableHitlag=false, Direct_Hitbox=true, Ground_or_Air=COLLISION_SITUATION_MASK_G, Hitbits=COLLISION_CATEGORY_MASK_ALL, CollisionPart=COLLISION_PART_MASK_ALL, FriendlyFire=false, Effect=hash40("collision_attr_rush"), SFXLevel=ATTACK_SOUND_LEVEL_M, SFXType=COLLISION_SOUND_ATTR_MAGIC, Type=ATTACK_REGION_MAGIC)
-        AttackModule::set_add_reaction_frame(ID=0, Frames=-13, Unk=false)
-        AttackModule::set_add_reaction_frame(ID=1, Frames=-13, Unk=false)
+        AttackModule::set_add_reaction_frame(ID=0, Frames=-13.0, Unk=false)
+        AttackModule::set_add_reaction_frame(ID=1, Frames=-13.0, Unk=false)
     }
     frame(Frame=28)
     if(is_excute){
@@ -516,7 +517,7 @@ pub fn instant_palutena_attack_air_b(fighter: &mut L2CFighterCommon) {
         HIT_NODE(hash40("virtualshield"), HIT_STATUS_OFF)
     }
     if(is_excute){
-        AttackModule::clear_all(0)
+        AttackModule::clear_all()
     }
     frame(Frame=35)
     if(is_excute){
@@ -647,8 +648,6 @@ pub fn install() {
     //if CONFIG.instant_info.banjo{
     acmd::add_hooks!(
         instant_palutena_attack_11,
-        instant_palutena_attack_12,
-        instant_palutena_attack_13,
         instant_palutena_attack_dash,
         instant_palutena_attack_s3,
         instant_palutena_attack_hi3,

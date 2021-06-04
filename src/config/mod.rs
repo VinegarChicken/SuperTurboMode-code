@@ -4,20 +4,17 @@ use std::io::Write;
 use std::convert::From;
 use std::*;
 use skyline::error::show_error;
-
-
 use semver::Version;
-
-use serde::{Deserialize, Serialize};
+use serde::*;
 use std::path::Path;
 
 const CONFIG_FILE_PATH: &str = "sd:/atmosphere/contents/01006A800016E000/romfs/SuperTurboMode.toml";
 
 lazy_static::lazy_static! {
-    pub static ref CONFIG: Box<Config> = Config::open().unwrap();
+    pub static ref CONFIG: Config = Config::open().unwrap();
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct Config {
     pub instant_info: InstantInfo,
     pub misc: Miscellaneous,
@@ -31,7 +28,7 @@ pub struct Config {
     pub mac_changes: MacChanges,
     pub lucario_changes: LucarioChanges
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct InstantInfo {
     pub donkey_kong: bool,
     pub captain_falcon: bool,
@@ -61,55 +58,63 @@ pub struct InstantInfo {
     pub ken: bool,
     pub darkpit: bool,
     pub pit: bool,
+    pub hero: bool,
+    pub joker: bool,
+    pub falco: bool,
+    pub bowserjr: bool,
+    pub mewtwo: bool,
+    pub younglink: bool,
+    pub wario: bool,
+    pub terry: bool,
+    pub diddy: bool,
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct VersionInfo {
     pub version_num: String,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct HomerunContest {
     pub power_multiplier: String,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct GanondorfChanges {
     pub rng_ganon_u_smash: bool,
     pub rng_ganon_f_smash: bool,
     pub rng_ganon_u_smash_chances_upper: String,
     pub rng_ganon_f_smash_chances_upper: String,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct MacChanges {
     pub actual_down_air: bool,
     pub actual_down_bair: bool,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct LucasChanges {
     pub giant_special_n: bool,
 }
-
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct BanjoChanges {
     pub fair_spike: bool,
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct FoxChanges {
     pub better_down_air: bool,
     pub two_billion_percent_fair: bool,
     pub shine_actual_spike: bool,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct LucarioChanges {
     pub always_max_aura: bool,
     pub overpowered_giant_aura_sphere: bool,
 }
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct BayonettaChanges {
     pub super_long_witch_time: bool,
 }
 
-#[derive(Debug, Default, Serialize, Deserialize)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct Miscellaneous {
     pub airdodge_cancels: bool,
     pub infinite_airdodges: bool,
@@ -121,7 +126,7 @@ pub struct Miscellaneous {
 impl Config {
     pub fn new() -> Self {
         Config {
-            instant_info: InstantInfo {
+            instant_info: InstantInfo{
                 donkey_kong: true,
                 captain_falcon: true,
                 corrin: true,
@@ -150,6 +155,15 @@ impl Config {
                 ken: true,
                 darkpit: true,
                 pit: true,
+                hero: true,
+                joker: true,
+                falco: true,
+                bowserjr: true,
+                mewtwo: true,
+                younglink: true,
+                wario: true,
+                terry: true,
+                diddy: true
             },
             misc: Miscellaneous {
                 airdodge_cancels: true,
@@ -175,9 +189,9 @@ impl Config {
                 fair_spike: true,
             },
             fox_changes: FoxChanges{
-                better_down_air: true,
-                two_billion_percent_fair: true,
-                shine_actual_spike: true,
+                better_down_air: false,
+                two_billion_percent_fair: false,
+                shine_actual_spike: false,
             },
             lucas_changes: LucasChanges{
                 giant_special_n: false,
@@ -190,31 +204,31 @@ impl Config {
                 super_long_witch_time: false,
             },
             version_info: VersionInfo {
-                version_num: env!("CARGO_PKG_VERSION").to_string(),
+                version_num: String::from(env!("CARGO_PKG_VERSION")),
             },
             .. Config::default()
         }
     }
 
-    pub fn open() -> Result<Box<Config>, String> {
+    pub fn open() -> Result<Config, String> {
+        if Path::exists(CONFIG_FILE_PATH.as_ref()){
+            fs::remove_file(CONFIG_FILE_PATH);
+        }
         match fs::read_to_string(CONFIG_FILE_PATH) {
             // File exists
             Ok(content) => {
                 // Try deserializing
                 let mut config = match toml::from_str(&content) {
                     // Deserialized properly
-                    Ok(conf) => {
-                        Box::new(conf)
-                    },
+                    Ok(conf) => conf,
                     // Something happened when deserializing
                     Err(_) => {
                         println!("Super turbo mode Configuration file could not be deserialized");
                         show_error(1, "Configuration file could not be deserialized", &format!("Your configuration file ({}) is either poorly manually edited, outdated, corrupted", CONFIG_FILE_PATH));
                         println!("Super turbo mode Generating configuration file...");
-                        Box::new(Config::new())
+                        Config::new()
                     }
                 };
-
                 // Make sure the version matches with the current release
                 if Version::parse(&config.version_info.version_num) < Version::parse(&env!("CARGO_PKG_VERSION").to_string()) {
                     println!("Super turbo mode: Configuration file version mismatch");
@@ -232,9 +246,9 @@ impl Config {
             }
             // File does not exist, generate it
             Err(_) => {
-                skyline_web::DialogOk::ok(format!("Thank you for installing Super Turbo mode !\n\nConfiguration file will now be generated"));
+               // skyline_web::DialogOk::ok(format!("Thank you for installing Super Turbo mode !\n\nConfiguration file will now be generated"));
 
-                let config = Box::new(Config::new());
+                let config = Config::new();
                 config.save().unwrap();
 
                 Ok(config)

@@ -814,7 +814,7 @@ pub fn instant_joker_attack_air_lw(fighter: &mut L2CFighterCommon) {
 
 
 pub fn install() {
-    //if CONFIG.instant_info.banjo{
+    if CONFIG.instant_info.joker{
         acmd::add_hooks!(
         instant_joker_attack_11,
         instant_joker_attack_12,
@@ -836,6 +836,6 @@ pub fn install() {
         //instant_joker_special_lw,
         //instant_joker_special_air_lw
     );
-    //}
+    }
 
 }

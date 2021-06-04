@@ -9,24 +9,54 @@ use acmd::{acmd, acmd_func};
 use smash::app::lua_bind::StatusModule::*;
 use smash::params::*;
 use crate::config::CONFIG;
-use smash::app::AttackData;
-use smash::app::SituationKind;
-use std::path::Path;
-use std::fs;
-use std::io::{Seek, SeekFrom};
-use std::io::Error;
 use skyline::nn::ro::LookupSymbol;
-use smash::cpp::root::app::lua_bind::AttackModule::attack_data;
-use smash::cpp::root::app::Fighter_is_absolutely_final_status;
-use smash::app::sv_animcmd::PLAY_SE;
-use std::time::Duration;
-use skyline::nn::os::StartThread;
-use smash::cpp::root::app::lua_bind::ColorBlendModule::set_main_color;
-use skyline::nn::fs::CanMountRom;
+use smash::app::{SituationKind, BattleObjectModuleAccessor};
+use smash::cpp::root::app::lua_bind::StopModule::is_damage;
+
+pub unsafe fn is_damage_check(boma : &mut BattleObjectModuleAccessor) -> bool {
+    if StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_AIR
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_THROWN
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CAPTURE_WAIT
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CAPTURE_DAMAGE
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY_ROLL
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY_METEOR
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_LR
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_U
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FLY_REFLECT_D
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DAMAGE_FALL
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_FINAL
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_SLEEP
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ESCAPE_B
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ESCAPE_F
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ESCAPE
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CLIFF_ESCAPE
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ESCAPE_AIR
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CAPTURE_JACK_WIRE
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CAPTURE_MASTERHAND
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CAPTURE_MASTER_SWORD
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_SWALLOWED
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_AIR_LASSO
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CATCHED_REFLET
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_CATCHED_RIDLEY
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ATTACK_AIR
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_MISS_FOOT
+    || WorkModule::is_flag(boma, *FIGHTER_INSTANCE_WORK_ID_FLAG_CAPTURE_YOSHI)
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_DEAD
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_REBIRTH
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_BURY
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_BURY_WAIT
+    || StatusModule::status_kind(boma) == *FIGHTER_STATUS_KIND_ICE {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 pub static mut FIGHTER_MANAGER_ADDR: usize = 0;
 static mut entry_id : usize = 0;
-
 
 
 pub fn other_stuff(fighter: &mut L2CFighterCommon){
@@ -87,6 +117,14 @@ pub fn other_stuff(fighter: &mut L2CFighterCommon){
                 MotionModule::set_rate(module_accessor, 23.0);
             }
         }
+        /*
+        if fighter_kind == FIGHTER_KIND_GEKKOUGA{
+            if [*FIGHTER_GEKKOUGA_STATUS_KIND_SPECIAL_N_HOLD, *FIGHTER_GEKKOUGA_STATUS_KIND_SPECIAL_N_SHOT].contains(&status){
+                StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_GEKKOUGA_STATUS_KIND_SPECIAL_N_MAX_SHOT, true);
+            }
+        }
+
+         */
     }
 }
 
@@ -97,6 +135,7 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
         //status kind 103 is teching ground
         //status kind 34 is air dodging
         //status kind 32 is dodging
+
         let module_accessor = smash::app::sv_system::battle_object_module_accessor(fighter.lua_state_agent);
         let fighter_kind = smash::app::utility::get_kind(module_accessor);
         let special: [i32 ; 47] = [*FIGHTER_STATUS_KIND_SPECIAL_HI,  *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_3, *FIGHTER_IKE_STATUS_KIND_SPECIAL_HI_4, *FIGHTER_KROOL_STATUS_KIND_SPECIAL_HI, *FIGHTER_ROY_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_ROY_STATUS_KIND_SPECIAL_HI_3, *FIGHTER_ROY_STATUS_KIND_SPECIAL_HI_4, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI2, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI3, *FIGHTER_KIRBY_STATUS_KIND_SPECIAL_HI4, *FIGHTER_KOOPA_STATUS_KIND_SPECIAL_HI_A, *FIGHTER_KOOPA_STATUS_KIND_SPECIAL_HI_G, *FIGHTER_ZELDA_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_ZELDA_STATUS_KIND_SPECIAL_HI_3,*FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_JACK_STATUS_KIND_SPECIAL_HI_CUT, *FIGHTER_LINK_STATUS_KIND_SPECIAL_HI_END,*FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_MEWTWO_STATUS_KIND_SPECIAL_HI_3, *FIGHTER_NESS_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_REFLET_STATUS_KIND_SPECIAL_HI_2, *FIGHTER_RYU_STATUS_KIND_SPECIAL_HI_FALL, *FIGHTER_RYU_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_HI_CHARGE, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_HI_UPPER, *FIGHTER_DIDDY_STATUS_KIND_SPECIAL_HI_FALL_ROLL, *FIGHTER_FOX_STATUS_KIND_SPECIAL_HI_BOUND,*FIGHTER_POPO_STATUS_KIND_SPECIAL_HI_FAIL, *FIGHTER_POPO_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_SHEIK_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_SHULK_STATUS_KIND_SPECIAL_HI_ADD,*FIGHTER_SNAKE_STATUS_KIND_SPECIAL_HI_CUT,*FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_END,  *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_FLAP, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_TURN, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_WAIT, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_DETACH, *FIGHTER_MURABITO_STATUS_KIND_SPECIAL_HI_LANDING,*FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_END, *FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_LANDING, *FIGHTER_EDGE_STATUS_KIND_SPECIAL_HI_CHARGED_RUSH, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_RUSH, *FIGHTER_LUCARIO_STATUS_KIND_SPECIAL_HI_BOUND, *FIGHTER_SONIC_STATUS_KIND_SPECIAL_HI_JUMP, *FIGHTER_ROCKMAN_STATUS_KIND_SPECIAL_HI_JUMP];
@@ -106,9 +145,6 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
         //println!{"{}", StatusModule::status_kind(module_accessor)}
         let curr_status = StatusModule::status_kind(module_accessor);
        // println!("{}", StatusModule::status_kind(module_accessor));
-        if AttackModule::is_infliction(module_accessor, *COLLISION_KIND_MASK_HIT){
-            CancelModule::enable_cancel(module_accessor);
-        }
         //WorkModule::is_flag(module_accessor, *FIGHTER_CLOUD_INSTANCE_WORK_ID_FLAG_LIMIT_GAUGE_CHARGE);
         /*
         if fighter_kind == *FIGHTER_KIND_ROY{
@@ -157,13 +193,13 @@ pub fn config_implementations(fighter : &mut L2CFighterCommon) {
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_SPECIAL_HI, true);
             }
         }
-        if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_CATCH){
+        if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_CATCH) && !is_damage_check(module_accessor) && !no_aerial_smash_status.contains(&curr_status){
             StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_CATCH, true);
             if StatusModule::status_kind(module_accessor) == *FIGHTER_STATUS_KIND_CATCH{
                 StatusModule::set_situation_kind(module_accessor, SituationKind(*SITUATION_KIND_GROUND), true)
             }
         }
-        if CONFIG.misc.aerial_smash_attacks && !no_aerial_smash_status.contains(&curr_status){
+        if CONFIG.misc.aerial_smash_attacks && !is_damage_check(module_accessor) && !no_aerial_smash_status.contains(&curr_status){
             //CancelModule::enable_cancel(module_accessor);
             if !ControlModule::check_button_on(module_accessor, *CONTROL_PAD_BUTTON_CATCH) && ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R){
                 StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4, true);
