@@ -293,7 +293,7 @@ pub fn instant_wolf_attack_hi3(fighter: &mut L2CFighterCommon) {
     }
     wait(Frames=2)
     if(is_excute){
-        AttackModule::clear(ID=0, true)
+        //AttackModule::clear(ID=0, false)
     }
     wait(Frames=3)
     if(is_excute){
