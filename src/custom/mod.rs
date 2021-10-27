@@ -70,7 +70,7 @@ pub unsafe fn smash_atks(module_accessor: &mut BattleObjectModuleAccessor){
         MotionModule::motion_kind(module_accessor) == smash::hash40("appeal_lw_l") {
         StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_LW4, true);
     }
-    if CONFIG.misc.aerial_smash_attacks && !is_damage_check(module_accessor) && !no_aerial_smash_status.contains(&curr_status){
+    if CONFIG.misc.aerial_smash_attacks && !is_damage_check(module_accessor) && !no_aerial_smash_status.contains(&curr_status){&& StatusModule::situation_kind(module_accessor) == *SITUATION_KIND_AIR
         //CancelModule::enable_cancel(module_accessor);
         if ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_L) || ControlModule::check_button_trigger(module_accessor, *CONTROL_PAD_BUTTON_APPEAL_S_R){
             StatusModule::change_status_request_from_script(module_accessor, *FIGHTER_STATUS_KIND_ATTACK_S4, true);
